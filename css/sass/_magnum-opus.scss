@@ -1,0 +1,39 @@
+$background: #ed145b;
+
+div.magnum-opus {
+	position: relative;
+	width: 90%;
+	height: 11em;
+	margin: 0 auto 1em auto;
+	background: $background;
+	font-family: "Actual";
+	font-weight: lighter;
+	color: rgba(255,255,255,0.7);
+	font-size: 20pt;
+	text-transform: uppercase;
+	box-sizing: border-box;
+	padding: 1em;
+
+	img { display: none; }
+
+	h2 { font-weight: normal; margin: 0; }
+
+	a { color: #fff; text-decoration: none; }
+
+	a:hover { text-decoration: underline; }
+
+	ul { 
+		list-style-type: none; 
+		padding: 0; 
+		margin: 0;
+		color: rgba(255,255,255,0.5);
+	
+		span.number { color: #fff; }
+	}
+
+}
+
+@font-face {
+	font-family: "Actual";
+	src: url("./fonts/Bebas/BebasNeue Light.otf");
+}
