@@ -1,4 +1,15 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic);
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:300italic");
+
+$text: rgba(255,255,255,0.7);
+$highlights: #fff;
+$background: rgba(47,198,255,0.5);
+
+@mixin box-sizing {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 
 * 
 {	font-family: 'Segoe UI Light', 'Open Sans', sans-serif;
@@ -10,7 +21,7 @@ div.social-wrap {
 	width: 90%;
 	height: 10em;
 	margin: 0 auto 1em auto;
-	background: rgba(47,198,255,0.5);
+	background: $background;
 }
 
 div.social-wrap div.profile_pic_wrap {
@@ -18,25 +29,25 @@ div.social-wrap div.profile_pic_wrap {
 	height: 10em;
 	width: 10em;
 	float: left;
-	box-sizing: border-box;
+
 }
 
 div.social-wrap div.tweet_text_wrap {
 	position: relative;
 	width: 85%;
 	height: 7em;
-	box-sizing: border-box;
 	float: left;
+	@include box-sizing;
 }
 
 div.social-wrap h2 {
 	font-size: 14pt;
-	color: rgba(255,255,255,0.7);
+	color: $text;
 	margin-top: 2em;
 }
 
 div.social-wrap a { 
-	color: #fff; 
+	color: $highlights; 
 	text-decoration: none; 
 }
 
@@ -50,10 +61,10 @@ ul.social-menu-bar {
 	display: block;
 	padding: 0;
 	margin: 0;
-	box-sizing: border-box;
 	width: 85%;
 	height: 3em;
 	float: left;
+	@include box-sizing;
 }
 
 ul.social-menu-bar li {
@@ -61,9 +72,9 @@ ul.social-menu-bar li {
 	float: left;
 	width: 20%;
 	height: 100%;
-	box-sizing: border-box;
 	margin: 0;
-	color: rgba(255,255,255,0.5);
+	color: $text;
+	@include box-sizing;
 }
 
 div.social-wrap img {
