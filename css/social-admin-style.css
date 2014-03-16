@@ -1,0 +1,132 @@
+/**
+ * Plugin Name: Stats
+ * Plugin URI: http://jonbrennecke.github.io/
+ * Version: v1.00
+ * Author: <a href="http://jonbrennecke.github.io/">Jon Brennecke</a>
+ * Description: Infographics
+ *
+ * @package WordPress
+ * @subpackage Social
+ * @since Social 1.0
+ *
+ */
+
+.wrap h2.page-title {
+	font-weight: lighter;
+	margin-bottom: 1em;
+}
+
+.wrap form.social h2, h3 {
+	margin: 0;
+	color: #eee;
+	font-weight: lighter;
+}
+
+.wrap form.social h2 {
+	padding: 1em;
+}
+
+.wrap form.social h3 span {
+	position: relative;
+	display: block;
+	padding: 2em;
+	border-top: 15px solid rgba(255,255,255,0.6);
+	-webkit-transition: background 0.3s;
+}
+
+/* doesn't work in IE. Sorry. */
+.wrap form.social h3 span::before {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 7.5px;
+	background: rgba(255,255,255,0.5);
+	top: -15px;
+	left: 0;
+}
+
+/* background color */
+.wrap form.social .twitter { background: #2fc6ff; }
+.wrap form.social .facebook { background: #3959a6; }
+.wrap form.social .google { background: #d84d30; }
+
+/* hover */
+.wrap form.social .twitter:hover { background: #29acdd; }
+.wrap form.social .facebook:hover { background: #324e91; }
+.wrap form.social .google:hover { background: #bc432a; }
+
+.wrap form.social div.social_sections {
+	position: relative;
+	overflow: hidden;
+	background: #222;
+}
+
+.wrap form.social div.settings_fields {
+	position: absolute;
+	display: none;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	padding: 5em;
+}
+
+.wrap form.social div.settings_fields tr {
+	position: relative;
+	display: block;
+	width: 100%;
+	padding: 0.5em;
+	left: 100%;
+}
+
+.wrap form.social div.settings_fields th, input {
+	font-size: 12pt;
+	width: 15em;
+	display: block;
+	padding: 1em;
+	height: 3em;
+}
+
+.wrap form.social div.settings_fields th {
+	font-weight: lighter;
+	color: #eee;
+	float: left;
+	text-align: left;
+	background: rgba(0,0,0,0.1);
+	box-sizing: border-box;
+}
+
+.wrap form.social div.settings_fields input {
+	background: rgba(255,255,255,0.3);
+	border: none;
+	box-shadow: none;
+	margin: 0;
+}
+
+/* submit button */
+
+.wrap form.social p.save {
+	margin: 0;
+	padding: 0;
+	height: 0;
+	border-radius: 0;
+	overflow: hidden;
+}
+
+.wrap form.social input#save{
+	margin: 0;
+	width: 100%;
+	border: none;
+	border-radius: 0px;
+	padding: 1em;
+	height: 3em;
+	line-height: 1;
+	background: #222;
+	font-weight: lighter;
+	color: #eee;
+	box-shadow: none;
+	-webkit-transform: background 0.3s;
+}
+
+.wrap form.social input#save:hover {
+	background: #2a2a2a;
+}
