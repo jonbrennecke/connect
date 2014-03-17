@@ -91,23 +91,14 @@ function register_options() {
 		'social_settings_page'
 	);
 
-	// $fields = array( 
-	// 	'twitter-api-key' => 'API Key',
-	// 	'twitter-api-secret' => 'API Secret',
-	// 	'twitter-access-token' => 'Access Token',
-	// 	'twitter-access-secret' => 'Access Token Secret' );
+	add_settings_section(
+		'instagram',
+		'<span class="instagram">Instagram</span>',
+		null,
+		'social_settings_page'
+	);
 
-	// foreach ($fields as $id => $title) {
-
-	// 	// register the field with WP
-	// 	register_setting( 'twitter_settings', $id );
-
-	// 	// and create a settings field
-	// 	add_settings_field( $id, $title, 'social\input_callback', 'social_settings_page', 
-	// 		'twitter_section', array( 'id' => $id, 'value' => get_option( $id ) ) 
-	// 	);
-	// }
-
+	// sections and input fields
 	$sections = array( 
 		'twitter' => array(
 			'twitter-api-key' => 'API Key',
@@ -119,9 +110,13 @@ function register_options() {
 			'facebook-app-id' => 'App ID',
 			'facebook-app-secret' => 'App Secret'
 		),
+		'instagram' => array(
+			'instagram-id' => 'Client ID',
+			'instagram-secret' => 'Client Secret'
+		),
 		'google' => array(
-			'google-app-id' => 'App ID',
-			'google-app-secret' => 'App Secret'
+			'google-app-id' => 'Client ID',
+			'google-app-secret' => 'Client Secret'
 		)
 	);
 
@@ -165,6 +160,10 @@ function get_settings_fields() {
 
 			case 'google':
 				do_settings_fields( 'social_settings_page', 'google_section' );
+				break;
+
+			case 'instagram':
+				do_settings_fields( 'social_settings_page', 'instagram_section' );
 				break;
 			
 			default:

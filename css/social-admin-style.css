@@ -49,11 +49,13 @@
 .wrap form.social .twitter { background: #2fc6ff; }
 .wrap form.social .facebook { background: #3959a6; }
 .wrap form.social .google { background: #d84d30; }
+.wrap form.social .instagram { background: #437198; }
 
 /* hover */
 .wrap form.social .twitter:hover { background: #29acdd; }
 .wrap form.social .facebook:hover { background: #324e91; }
 .wrap form.social .google:hover { background: #bc432a; }
+.wrap form.social .instagram { background: #345877; }
 
 .wrap form.social div.social_sections {
 	position: relative;
