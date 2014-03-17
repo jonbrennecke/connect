@@ -43,11 +43,7 @@ function create_plugin_page() {
 				<div class="social_sections">
 				<h2>Connect your account...</h2>
 
-				<?php 
-
-					
-
-				do_settings_sections_title( 'social_settings_page' ); ?>
+				<?php do_settings_sections_title( 'social_settings_page' ); ?>
 				
 				<div class="settings_fields"></div></div>
 				<p class="save"><input type="button" id="save" value="Save" /></p>
@@ -84,7 +80,7 @@ function register_options() {
 	add_settings_section(
 		'twitter_section',
 		'<span class="twitter">Twitter</span>',
-		'social\section_callback',
+		null,
 		'social_settings_page'
 	);
 
@@ -95,26 +91,52 @@ function register_options() {
 		'social_settings_page'
 	);
 
-	$fields = array( 
-		'twitter-api-key' => 'API Key',
-		'twitter-api-secret' => 'API Secret',
-		'twitter-access-token' => 'Access Token',
-		'twitter-access-secret' => 'Access Token Secret' );
+	// $fields = array( 
+	// 	'twitter-api-key' => 'API Key',
+	// 	'twitter-api-secret' => 'API Secret',
+	// 	'twitter-access-token' => 'Access Token',
+	// 	'twitter-access-secret' => 'Access Token Secret' );
 
-	foreach ($fields as $id => $title) {
+	// foreach ($fields as $id => $title) {
 
-		// register the field with WP
-		register_setting( 'twitter_settings', $id );
+	// 	// register the field with WP
+	// 	register_setting( 'twitter_settings', $id );
 
-		// and create a settings field
-		add_settings_field( $id, $title, 'social\input_callback', 'social_settings_page', 
-			'twitter_section', array( 'id' => $id, 'value' => get_option( $id ) ) 
-		);
+	// 	// and create a settings field
+	// 	add_settings_field( $id, $title, 'social\input_callback', 'social_settings_page', 
+	// 		'twitter_section', array( 'id' => $id, 'value' => get_option( $id ) ) 
+	// 	);
+	// }
+
+	$sections = array( 
+		'twitter' => array(
+			'twitter-api-key' => 'API Key',
+			'twitter-api-secret' => 'API Secret',
+			'twitter-access-token' => 'Access Token',
+			'twitter-access-secret' => 'Access Token Secret'
+		),
+		'facebook' => array(
+			'facebook-app-id' => 'App ID',
+			'facebook-app-secret' => 'App Secret'
+		),
+		'google' => array(
+			'google-app-id' => 'App ID',
+			'google-app-secret' => 'App Secret'
+		)
+	);
+
+	foreach ($sections as $section => $fields) {
+
+		foreach ($fields as $id => $title) {
+			// register the field with WP
+			register_setting( "{$section}_settings", $id );
+
+			// and create a settings field
+			add_settings_field( $id, $title, 'social\input_callback', 'social_settings_page', 
+				"{$section}_section", array( 'id' => $id, 'value' => get_option( $id ) ) 
+			);
+		}
 	}
-}
-
-function section_callback($args){
-	echo '<div></div>';
 }
 
 /**
