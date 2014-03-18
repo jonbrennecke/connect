@@ -85,6 +85,44 @@ class Twitter_API {
 
 	/**
 	 *
+	 * Returns a variety of information about the user specified by the required user_id 
+	 * or screen_name parameter. The author's most recent Tweet will be returned inline when possible.
+	 *
+	 * @see https://dev.twitter.com/docs/api/1.1/get/users/show
+	 */
+	public function get_user( $screen_name = 'twitterapi' ) {
+
+		// arguments for wp_remote_get
+		$get_args = array(
+			'method' => 'GET',
+			'httpversion' => '1.1',
+			'headers' => array( 
+				'Authorization' => 'Bearer ' . $this->bearer_token,
+				'Accept-Encoding' => 'gzip'
+			)
+		);
+
+		// build url
+		$url = 'https://api.twitter.com/1.1/users/show.json';
+		$url .= '?' . http_build_query( array( 'screen_name' => $screen_name, 'include_entities' => true ) );
+
+		// post request to Twitter
+		$response = wp_remote_post( $url, $get_args );
+
+		// is the post request successful?
+		if( is_wp_error( $response ) ) {
+			die();
+		}
+			
+		// decode the JSON string in 'body' into a php 'stdClass' object
+		$body = json_decode( $response['body'] );
+
+		return $body;
+	}
+
+
+	/**
+	 *
 	 * get the OAuth 2 bearer token from twitter
 	 *
 	 * @see https://dev.twitter.com/docs/auth/application-only-auth

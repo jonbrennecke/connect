@@ -35,17 +35,19 @@ function create_plugin_page() {
 	?>
 		<div class="wrap">
 			<?php screen_icon(); // TODO necessary? ?>
-			<h2 class="page-title">Social Plugin Options</h2>
-			<form class="social" method="post" action="">
-				
-				<?php settings_fields( 'twitter_settings' ); ?>
-				
-				<div class="social_sections">
-				<h2>Connect your account...</h2>
-
-				<?php do_settings_sections_title( 'social_settings_page' ); ?>
-				
-				<div class="settings_fields"></div></div>
+			<h2 class="page-title">CONNECT Admin Panel</h2>
+			<form class="social" method="post" action="">				
+				<div class="social-sections">
+					<h2 class="header accounts">ACCOUNTS</h2>
+					<h2 class="header settings">SETTINGS</h2>
+					<div class="section-titles">
+						<?php do_settings_sections_title( 'social_settings_page' ); ?>
+					</div>
+					
+					<div class="section-fields">
+						<!-- AJAX loaded input fields -->
+					</div>
+				</div>
 				<p class="save"><input type="button" id="save" value="Save" /></p>
 			</form>
 		</div>
@@ -57,11 +59,12 @@ function create_plugin_page() {
  * but only prints the section title, not section contents
  */
 function do_settings_sections_title( $page ) {
-	global $wp_settings_sections, $wp_settings_fields;
+	global $wp_settings_sections;
 
 	foreach ( (array) $wp_settings_sections[$page] as $section ) {
-		if ( $section['title'] )
+		if ( $section['title'] ) {
 			echo "<h3>{$section['title']}</h3>\n";
+		}
 	}
 }
 
@@ -104,7 +107,7 @@ function register_options() {
 			'twitter-api-key' => 'API Key',
 			'twitter-api-secret' => 'API Secret',
 			'twitter-access-token' => 'Access Token',
-			'twitter-access-secret' => 'Access Token Secret'
+			'twitter-access-secret' => 'Access Secret'
 		),
 		'facebook' => array(
 			'facebook-app-id' => 'App ID',
@@ -121,8 +124,8 @@ function register_options() {
 	);
 
 	foreach ($sections as $section => $fields) {
-
 		foreach ($fields as $id => $title) {
+
 			// register the field with WP
 			register_setting( "{$section}_settings", $id );
 
@@ -151,6 +154,7 @@ function get_settings_fields() {
 		switch ( $_POST['sectionName'] ) {
 
 			case 'twitter':
+				twitter_fields();
 				do_settings_fields( 'social_settings_page', 'twitter_section' );
 				break;
 
@@ -171,6 +175,22 @@ function get_settings_fields() {
 		}
 	}
 	die();
+}
+
+function twitter_fields(){
+
+	require_once('inc/twitter-api.php');
+
+	$twitter_api = new \Twitter_API( array(
+		'api-key' => get_option( 'twitter-api-key' ),
+		'api-secret' => get_option( 'twitter-api-secret' ),
+		'access-token' => get_option( 'twitter-access-token' ),
+		'access-secret' => get_option( 'twitter-access-secret' )
+	));
+
+	$user = $twitter_api->get_user( 'jonbrennecke' );
+
+	var_dump($user);
 }
 
 /**
@@ -203,5 +223,6 @@ function save_settings_fields() {
 	}
 	die();
 }
+
 
 ?>

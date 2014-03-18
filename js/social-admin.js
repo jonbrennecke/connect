@@ -17,105 +17,101 @@ jQuery(document).ready( function () {
 	// this allows us to safely use variable '$' for jQuery in 'noConflict' mode
 	( function ( $ ) {
 
-		var activeSection;
+		var form = $('form.social'),
+			h3 = form.find('div.section-titles h3 span'),
+			activeSection;
 
 		// onclick actions for Twitter/Facebook/Google+
-		$('.wrap form.social h3 span').click( function ( e ) {
+		h3.click( function ( e ) {
 
 			activeSection = e.target;
 
-			// animate sliding the spans out at an incremental delay
-			$('.wrap form.social h3 span')
-				.each( function ( i ) {
-					$(this)
-						.delay( i * 100 )
-						.animate({'left' : '-=100%'}, { duration : 300, easing : 'easeInQuad' });
-				})
-				.promise().done( function(){ // wait til after that animation has finished
-
-					// change background-color to match the color of the clicked element
-					$('div.social_sections')
-						.animate( { 'backgroundColor' : window.getComputedStyle( e.target ).backgroundColor }, { duration : 600 } )
-
-					// get the matching settings section
-					$.ajax({
-						type : 'post',
-						url : ajaxurl,
-						data : { action : 'get_settings_fields', sectionName : e.target.className  },
-						dataType : 'html',
-						success : function ( html ) {
-
-							// add the fields to the 'div.settings_fields'
-							$('div.social_sections div.settings_fields')
-								.show()
-								.append( html )
-								.find('tr')
-								.each( function ( i ) {
-
-									// animate each row sliding in at an incremental delay
-									$(this)
-										.delay( i * 100 )
-										.animate( { left : '0%' }, { duration : 300, easing : 'easeInOutQuad' } );
-
-								});
-						},
-						error : function () {
-							console.error( 'AJAX request to server failed.' );
-						}
-					});
-				});
-		}); // end onclick actions for Twitter/Facebook/Google+
-
-		// on form change
-		$('.wrap form.social').on('change', function(){
-
-			// animate submit button
-			$(this)
-				.find('p.save')
-				.animate( { height : '4em'}, { duration : 200, easing : 'easeInQuad' } );
-
-		});
-
-		// form submit
-		$('.wrap form.social p.save').on('click', function(){
-
+			// get the html for the matching settings section
 			$.ajax({
 				type : 'post',
 				url : ajaxurl,
-				data : { 
-					action : 'save_settings_fields', 
-					data : { 
-						form : $('.wrap form.social').serialize(),
-						section : activeSection.className
-					}  
-				},
+				data : { action : 'get_settings_fields', sectionName : e.target.className  },
 				dataType : 'html',
-				success : function ( response ) {
+				success : function ( html ) {
 
-					// if successfully saved, the servers responds '1'
-					// otherwise the response from the server is blank
-					if ( response ) {
+					// add the fields to the 'section-fields' div elements
+					$('form.social').find('div.section-fields')
+						.show()
+						.append( html )
+						.find('tr')
+						.each( function ( i ) {
 
-						// make the save button green
-						$('input#save')
-							.animate( { 'backgroundColor' : '#00a651' }, { duration : 200 } )
-							.attr( 'value', 'Saved' )
-							.parent()
-							.delay( 1000 )
-							.animate( { height : 0 }, { duration : 300, easing : 'easeInQuad' } )
-							.promise()
-							.done( function(){
-								$('input#save').css('backgroundColor','#222').attr('value','Save');
+							// animate each row sliding in at an incremental delay
+							$(this)
+								.delay( i * 100 )
+								.animate( { left : '0%' }, { duration : 300, easing : 'easeInOutQuad' } );
+
+						});
+
+						form.find('div.section-fields input')
+							.focus( function () {
+								$(this).parent().parent().find('th').addClass('th-focus',250);
+							})
+							.blur( function () {
+								$(this).parent().parent().find('th').removeClass('th-focus',250);
 							});
-							
-					}
 				},
 				error : function () {
 					console.error( 'AJAX request to server failed.' );
 				}
 			});
+		}); // end onclick actions for Twitter/Facebook/Google+
 
-		});
+		// // on form change
+		// $('.wrap form.social').on('change', function(){
+
+		// 	// animate submit button
+		// 	$(this)
+		// 		.find('p.save')
+		// 		.animate( { height : '4em'}, { duration : 200, easing : 'easeInQuad' } );
+
+		// });
+
+		// // form submit
+		// $('.wrap form.social p.save').on('click', function(){
+
+		// 	$.ajax({
+		// 		type : 'post',
+		// 		url : ajaxurl,
+		// 		data : { 
+		// 			action : 'save_settings_fields', 
+		// 			data : { 
+		// 				form : $('.wrap form.social').serialize(),
+		// 				section : activeSection.className
+		// 			}  
+		// 		},
+		// 		dataType : 'html',
+		// 		success : function ( response ) {
+
+		// 			// if successfully saved, the servers responds '1'
+		// 			// otherwise the response from the server is blank
+		// 			if ( response ) {
+
+		// 				// make the save button green
+		// 				$('input#save')
+		// 					.animate( { 'backgroundColor' : '#00a651' }, { duration : 200 } )
+		// 					.attr( 'value', 'Saved' )
+		// 					.parent()
+		// 					.delay( 1000 )
+		// 					.animate( { height : 0 }, { duration : 300, easing : 'easeInQuad' } )
+		// 					.promise()
+		// 					.done( function(){
+		// 						$('input#save').css('backgroundColor','#222').attr('value','Save');
+		// 					});
+							
+		// 			}
+		// 		},
+		// 		error : function () {
+		// 			console.error( 'AJAX request to server failed.' );
+		// 		}
+		// 	});
+
+		// });
 
 	})( jQuery );
 });
