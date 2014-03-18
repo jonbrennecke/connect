@@ -38,13 +38,13 @@ function create_plugin_page() {
 			<h2 class="page-title">CONNECT Admin Panel</h2>
 			<form class="social" method="post" action="">				
 				<div class="social-sections">
-					<h2 class="header accounts">ACCOUNTS</h2>
-					<h2 class="header settings">SETTINGS</h2>
-					<div class="section-titles">
+					<div class="section titles">
 						<?php do_settings_sections_title( 'social_settings_page' ); ?>
 					</div>
-					
-					<div class="section-fields">
+					<div class="section profile">
+						<!-- AJAX loaded personal profile information -->
+					</div>
+					<div class="section fields">
 						<!-- AJAX loaded input fields -->
 					</div>
 				</div>
@@ -75,28 +75,28 @@ function register_options() {
 
 	add_settings_section(
 		'facebook_section',
-		'<span class="facebook">Facebook</span>',
+		'<span class="fa-facebook"></span>',
 		null,
 		'social_settings_page'
 	);
 
 	add_settings_section(
 		'twitter_section',
-		'<span class="twitter">Twitter</span>',
+		'<span class="fa-twitter"></span>',
 		null,
 		'social_settings_page'
 	);
 
 	add_settings_section(
 		'google_section',
-		'<span class="google">Google +</span>',
+		'<span class="fa-google-plus"></span>',
 		null,
 		'social_settings_page'
 	);
 
 	add_settings_section(
 		'instagram',
-		'<span class="instagram">Instagram</span>',
+		'<span class="fa-instagram"></span>',
 		null,
 		'social_settings_page'
 	);
@@ -145,7 +145,7 @@ function input_callback( $args ){
 }
 
 /**
- * AJAX function to retrieve form fields for a specific section
+ * AJAX function to retrieve the relevant form fields for a specific section
  */
 function get_settings_fields() {
 	
@@ -154,8 +154,9 @@ function get_settings_fields() {
 		switch ( $_POST['sectionName'] ) {
 
 			case 'twitter':
-				twitter_fields();
+				// echo '<table>';
 				do_settings_fields( 'social_settings_page', 'twitter_section' );
+				// echo '</table>';
 				break;
 
 			case 'facebook':
@@ -177,9 +178,38 @@ function get_settings_fields() {
 	die();
 }
 
-function twitter_fields(){
+/**
+ * AJAX function to retrieve the user's personal profile
+ */
+function get_profile() {
+	
+	if( isset( $_POST['sectionName'] ) && !empty( $_POST['sectionName'] ) ) {
 
-	require_once('inc/twitter-api.php');
+		switch ( $_POST['sectionName'] ) {
+
+			case 'twitter':
+				twitter_profile();
+				break;
+
+			case 'facebook':
+				break;
+
+			case 'google':
+				break;
+
+			case 'instagram':
+				break;
+			
+			default:
+				break;
+		}
+	}
+	die();
+}
+
+function twitter_profile(){
+
+	require_once( 'inc/twitter-api.php' );
 
 	// create a new Twitter_API object (in the global namespace)
 	$twitter = new \Twitter_API( array(
@@ -193,13 +223,12 @@ function twitter_fields(){
 	// TODO fix this to use either an option or correctly use 'verify_credential'
 	$user = $twitter->user( 'jonbrennecke' );
 
-	echo "<div class='profile twitter'>";
-	echo "<h1>{$user->name}, <a href=\"{$user->url}\">@{$user->screen_name}</a></h1>";
-	echo "<h2>{$user->description}</h2>";
-	echo "<ul><li>{$user->followers_count} Followers</li><li>{$user->friends_count} Friends</li><li>{$user->statuses_count} Tweets</li></ul>";
+	$str = "<h1>{$user->name}</h1>";
+	$str .= "<h3><a href=\"{$user->url}\">@{$user->screen_name}</a></h3>";
+	$str .= "<h2>{$user->description}</h2>";
+	$str .= "<ul><li>{$user->followers_count} Followers</li><li>{$user->friends_count} Friends</li><li>{$user->statuses_count} Tweets</li></ul>";
 
-
-	echo '</div>';
+	echo trim( preg_replace('/\s+/', ' ', $str));
 }
 
 /**

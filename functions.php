@@ -37,6 +37,7 @@ function add_actions() {
 		// register ajax functions with WP
 		add_action('wp_ajax_get_settings_fields', 'social\get_settings_fields');
 		add_action('wp_ajax_save_settings_fields', 'social\save_settings_fields');
+		add_action('wp_ajax_get_profile', 'social\get_profile');
 	}
 
 	// front-end actions

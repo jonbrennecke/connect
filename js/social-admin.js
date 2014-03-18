@@ -18,24 +18,35 @@ jQuery(document).ready( function () {
 	( function ( $ ) {
 
 		var form = $('form.social'),
-			h3 = form.find('div.section-titles h3 span'),
+			h3 = form.find('div.section.titles h3 span'),
 			activeSection;
 
 		// onclick actions for Twitter/Facebook/Google+
 		h3.click( function ( e ) {
 
-			activeSection = e.target;
+			target = e.target.className.split('fa-')[1];
 
 			// get the html for the matching settings section
 			$.ajax({
 				type : 'post',
 				url : ajaxurl,
-				data : { action : 'get_settings_fields', sectionName : e.target.className  },
+				data : { action : 'get_settings_fields', sectionName : target  },
 				dataType : 'html',
 				success : function ( html ) {
 
+					$.ajax({
+						type : 'post',
+						url : ajaxurl,
+						data : { action : 'get_profile', sectionName : target  },
+						dataType : 'html',
+						success : function ( html ) {
+							form.find('div.section.profile').append( html );
+						},
+						error : ajaxError
+					});
+
 					// add the fields to the 'section-fields' div elements
-					$('form.social').find('div.section-fields')
+					form.find('div.section.fields')
 						.show()
 						.append( html )
 						.find('tr')
@@ -45,20 +56,17 @@ jQuery(document).ready( function () {
 							$(this)
 								.delay( i * 100 )
 								.animate( { left : '0%' }, { duration : 300, easing : 'easeInOutQuad' } );
-
 						});
 
-						form.find('div.section-fields input')
-							.focus( function () {
-								$(this).parent().parent().find('th').addClass('th-focus',250);
-							})
-							.blur( function () {
-								$(this).parent().parent().find('th').removeClass('th-focus',250);
-							});
+					form.find('div.section.fields input')
+						.focus( function () {
+							$(this).parent().parent().find('th').addClass('th-focus',250);
+						})
+						.blur( function () {
+							$(this).parent().parent().find('th').removeClass('th-focus',250);
+						});
 				},
-				error : function () {
-					console.error( 'AJAX request to server failed.' );
-				}
+				error : ajaxError
 			});
 		}); // end onclick actions for Twitter/Facebook/Google+
 
@@ -115,3 +123,7 @@ jQuery(document).ready( function () {
 
 	})( jQuery );
 });
+
+function ajaxError( msg ){
+	console.log( msg );
+}
