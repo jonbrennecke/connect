@@ -1,0 +1,163 @@
+/**
+ * Plugin Name: Stats
+ * Plugin URI: http://jonbrennecke.github.io/
+ * Version: v1.00
+ * Author: <a href="http://jonbrennecke.github.io/">Jon Brennecke</a>
+ * Description: Infographics
+ *
+ * @package WordPress
+ * @subpackage Social
+ * @since Social 1.0
+ *
+ */
+
+@import "./FontAwesome/font-awesome";
+
+$highlight: #ee6049;
+$gray: #d8d5d0;
+$dark: #333;
+$bg: $gray;
+
+[class*="fa-"]:before {
+	font-family: 'FontAwesome', sans-serif;
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+
+.folded #wpcontent {
+	margin-left: 36px;
+
+	@media screen and (max-width: 782px) {
+		margin-left: 0;
+		padding: 0;
+	}
+}
+
+.wrap {
+	margin: 0;
+
+	h2.page-title {
+		margin: 0;
+		text-align: center;
+		background: $dark;
+		color: $highlight;
+		padding: 0.5em;
+		font-size: 10pt;
+		border: 1px solid lighten($dark, 5%);
+		border-bottom-color: transparent;
+	}
+
+	form.social {
+		height: 30em;
+		overflow: hidden;
+
+		div.social-sections {
+			height: 100%;
+
+			div.section {
+				position: relative;
+				float: left;
+				height: 100%;
+				box-sizing: border-box;
+			}
+
+			div.section.titles {
+				width: 5%;
+				background: $dark;
+
+				h3 {
+					margin: 0;
+				
+					span {
+						position: relative;
+						display: block;
+						font-weight: lighter;
+						padding: 1em;
+						background: $dark;
+						font-size: 18pt;
+						color: lighten($dark,35%);
+						border: 1px solid lighten($dark, 5%);
+						transition: background 0.1s, color 0.1s;
+						box-sizing: border-box;
+
+						&:hover {
+							background: darken($dark,5%);
+							color: lighten($dark,70%);
+							cursor: pointer;
+						}
+					}
+				}
+			}
+
+			div.section.profile {
+				width: 30%;
+				background: $highlight;
+				color: darken($dark,35%);
+				padding: 1em;
+				z-index: 2;
+				box-shadow: 0px 0px 100px 0px rgba(#000,1);
+				border: 1px solid lighten($highlight,10%);
+
+				h1, h2, h3 {
+					font-weight: lighter;
+					color: $dark;
+					font-family: "Canter";
+					// font-size: 20pt;
+					// text-transform: lowercase;
+				}
+
+				a { text-decoration: none; color: inherit; }
+			}
+
+			div.section.fields {
+				z-index: 3;
+				width: 65%;
+				background: $gray;
+				padding: 2em;
+				border: 1px solid lighten($gray,10%);
+				box-shadow: 0px 0px 100px 0px rgba(#000,0.3);
+
+				tr {
+					position: relative;
+					left: 100%;
+					display: block;
+					margin: 0.5em;
+					border: 1px solid darken($gray,35%);
+					color: darken($gray,35%);
+					width: 20em;
+					padding: 0.5em;
+					border-radius: 5px;
+
+					th {
+						padding: 0 0.5em;
+						vertical-align: middle;
+					}	
+					td {
+
+						input {
+							position: relative;
+							width: 10em;
+							border: none;
+							background:  none;
+							box-shadow: none;
+							outline: none;
+						}
+					}
+				}
+
+			}
+		}
+	}
+}
+
+/* ======================== */
+
+.th-focus {
+	background: darken($gray,20%);
+	border-radius: 5px;
+	color: $gray;
+}
+
+@font-face {
+	font-family: "Canter";
+	src: url("./fonts/Actual/ActualThin.otf");
+}
