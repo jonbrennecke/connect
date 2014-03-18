@@ -37,14 +37,60 @@ class Twitter_API {
 	}
 
 	/**
+	 * Returns an HTTP 200 OK response code and a representation of the requesting user 
+	 * if authentication was successful; returns a 401 status code and an error message 
+	 * if not. Use this method to test if supplied user credentials are valid.
+	 * 
+ 	 * @see https://dev.twitter.com/docs/api/1.1/get/account/verify_credentials
+	 */
+	public function verify( $args = array() ) {
+
+		$default = array( 
+			'entities' => false,
+			'status' => true
+		);
+
+		// merge with the default arguments
+		if ( is_array($args) && !empty($args) ) {
+			$params = array_merge($default, $args);
+		}
+
+		// arguments for wp_remote_get
+		$get_args = array(
+			'method' => 'GET',
+			'httpversion' => '1.0',
+			'headers' => array( 
+				'Authorization' => 'Bearer ' . $this->bearer_token,
+				'Accept-Encoding' => 'gzip'
+			)
+		);
+
+		// build url
+		$url = 'https://api.twitter.com/1.1/account/verify_credentials.json';
+		// $url .= '?' . http_build_query( array( 'entities' => $params['entities'], 'skip_status' => $params['status'] ) );
+
+		// post request to Twitter
+		$response = wp_remote_post( $url, $get_args );
+
+		// is the post request successful?
+		if( is_wp_error( $response ) ) {
+			die();
+		}
+			
+		// decode the JSON string in 'body' into a php 'stdClass' object
+		$body = json_decode( $response['body'] );
+
+		return $response;
+	}
+
+	/**
 	 * get the provided user's timeline from twitter
 	 * 
  	 * @see https://dev.twitter.com/docs/auth/application-only-auth
 	 */
-	public function get_user_timeline( $args = array() ) {
+	public function timeline( $args = array() ) {
 
 		$default = array( 
-			'bearer_token' => $this->bearer_token, 
 			'count' => 1, 
 			'screen_name' => 'twitterapi' 
 		);
@@ -90,7 +136,7 @@ class Twitter_API {
 	 *
 	 * @see https://dev.twitter.com/docs/api/1.1/get/users/show
 	 */
-	public function get_user( $screen_name = 'twitterapi' ) {
+	public function user( $screen_name = 'twitterapi' ) {
 
 		// arguments for wp_remote_get
 		$get_args = array(

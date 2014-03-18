@@ -181,16 +181,25 @@ function twitter_fields(){
 
 	require_once('inc/twitter-api.php');
 
-	$twitter_api = new \Twitter_API( array(
+	// create a new Twitter_API object (in the global namespace)
+	$twitter = new \Twitter_API( array(
 		'api-key' => get_option( 'twitter-api-key' ),
 		'api-secret' => get_option( 'twitter-api-secret' ),
 		'access-token' => get_option( 'twitter-access-token' ),
 		'access-secret' => get_option( 'twitter-access-secret' )
 	));
 
-	$user = $twitter_api->get_user( 'jonbrennecke' );
+	// get the users profile
+	// TODO fix this to use either an option or correctly use 'verify_credential'
+	$user = $twitter->user( 'jonbrennecke' );
 
-	var_dump($user);
+	echo "<div class='profile twitter'>";
+	echo "<h1>{$user->name}, <a href=\"{$user->url}\">@{$user->screen_name}</a></h1>";
+	echo "<h2>{$user->description}</h2>";
+	echo "<ul><li>{$user->followers_count} Followers</li><li>{$user->friends_count} Friends</li><li>{$user->statuses_count} Tweets</li></ul>";
+
+
+	echo '</div>';
 }
 
 /**
