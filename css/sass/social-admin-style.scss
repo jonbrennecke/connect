@@ -37,10 +37,9 @@ $bg: $gray;
 
 	h2.page-title {
 		margin: 0;
-		text-align: center;
 		background: $dark;
 		color: $highlight;
-		padding: 0.5em;
+		padding: 0.5em 5%;
 		font-size: 10pt;
 		border: 1px solid lighten($dark, 5%);
 		border-bottom-color: transparent;
@@ -61,11 +60,12 @@ $bg: $gray;
 			}
 
 			div.section.titles {
-				width: 5%;
+				width: 6%;
 				background: $dark;
 
 				h3 {
 					margin: 0;
+					text-align: center;
 				
 					span {
 						position: relative;
@@ -89,20 +89,42 @@ $bg: $gray;
 			}
 
 			div.section.profile {
-				width: 30%;
+				width: 7%;
 				background: $highlight;
-				color: darken($dark,35%);
+				color: $dark;
 				padding: 1em;
 				z-index: 2;
 				box-shadow: 0px 0px 100px 0px rgba(#000,1);
 				border: 1px solid lighten($highlight,10%);
+				border-right-color: darken($highlight,10%);
 
-				h1, h2, h3 {
+				h1, h3 {
 					font-weight: lighter;
-					color: $dark;
-					font-family: "Canter";
-					// font-size: 20pt;
-					// text-transform: lowercase;
+					font-family: "Open Sans";
+					margin: 0 0 1em 0;
+				}
+
+				h3 {
+					text-align: center;
+				}
+
+				h1 {
+					border: 1px solid lighten($highlight,5%);
+					padding: 1em;
+
+					span[class*="fa-"] {
+						margin-right: 0.5em;
+						display: block;
+						width: 1em;
+						float: left;
+					}
+				}
+
+				li {
+					padding: 0.5em;
+					width: 100%;
+					text-align: center;
+					box-sizing: border-box;
 				}
 
 				a { text-decoration: none; color: inherit; }
@@ -110,12 +132,12 @@ $bg: $gray;
 
 			div.section.fields {
 				z-index: 3;
-				width: 65%;
+				width: 87%;
 				background: $gray;
 				padding: 2em;
 				border: 1px solid lighten($gray,10%);
-				box-shadow: 0px 0px 100px 0px rgba(#000,0.3);
-
+				box-shadow: 0px 0px 100px 0px rgba(#000,0.4);
+// 
 				tr {
 					position: relative;
 					left: 100%;
@@ -159,5 +181,5 @@ $bg: $gray;
 
 @font-face {
 	font-family: "Canter";
-	src: url("./fonts/Actual/ActualThin.otf");
+	src: url("./fonts/Actual/ActualBook.otf");
 }

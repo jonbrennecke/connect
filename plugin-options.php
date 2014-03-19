@@ -35,7 +35,7 @@ function create_plugin_page() {
 	?>
 		<div class="wrap">
 			<?php screen_icon(); // TODO necessary? ?>
-			<h2 class="page-title">CONNECT Admin Panel</h2>
+			<!-- <h2 class="page-title">CONNECT Admin Panel</h2> -->
 			<form class="social" method="post" action="">				
 				<div class="social-sections">
 					<div class="section titles">
@@ -154,9 +154,7 @@ function get_settings_fields() {
 		switch ( $_POST['sectionName'] ) {
 
 			case 'twitter':
-				// echo '<table>';
 				do_settings_fields( 'social_settings_page', 'twitter_section' );
-				// echo '</table>';
 				break;
 
 			case 'facebook':
@@ -223,9 +221,9 @@ function twitter_profile(){
 	// TODO fix this to use either an option or correctly use 'verify_credential'
 	$user = $twitter->user( 'jonbrennecke' );
 
-	$str = "<h1>{$user->name}</h1>";
-	$str .= "<h3><a href=\"{$user->url}\">@{$user->screen_name}</a></h3>";
-	$str .= "<h2>{$user->description}</h2>";
+	$str = "<h1><span class='fa-user'></span><span class='title'>{$user->name}</span></h1>";
+	$str .= "<h3><a href=\"{$user->url}\">@{$user->screen_name}</a> - ";
+	$str .= "{$user->description}</h3>";
 	$str .= "<ul><li>{$user->followers_count} Followers</li><li>{$user->friends_count} Friends</li><li>{$user->statuses_count} Tweets</li></ul>";
 
 	echo trim( preg_replace('/\s+/', ' ', $str));

@@ -46,7 +46,7 @@ class Twitter_Widget extends WP_Widget {
 
 		$instance = wp_parse_args( (array) $instance, array( 'screen_name' => 'twitterapi', 'count' => 1, 'class_name' => 'social-wrap' ) );
 
-		$tweets = $this->twitter_api->get_user_timeline( array( 
+		$tweets = $this->twitter_api->timeline( array( 
 			'count' => $instance['count'],
 			'screen_name' => $instance['screen_name']
 		));
