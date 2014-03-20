@@ -26,9 +26,6 @@ jQuery(document).ready( function () {
 
 			target = e.target.className.split('fa-')[1];
 
-			form.find('div.section.profile').animate({ width : "30%" },{ duration : 500, easing: 'easeInOutQuad' });
-			form.find('div.section.fields').animate({ width : "64%" },{ duration : 500, easing: 'easeInOutQuad' });
-
 			// get the html for the matching settings section
 			$.ajax({
 				type : 'post',

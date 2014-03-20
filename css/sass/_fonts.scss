@@ -1,0 +1,7 @@
+@import "./FontAwesome/font-awesome";
+
+// font awesome
+[class*="fa-"]:before {
+	font-family: 'FontAwesome', sans-serif;
+	-webkit-font-smoothing: subpixel-antialiased;
+}

@@ -1345,18 +1345,18 @@
       padding: 0; } }
 
 .wrap {
-  margin: 0; }
-  .wrap h2.page-title {
-    margin: 0;
-    background: #333333;
-    color: #ee6049;
-    padding: 0.5em 5%;
-    font-size: 10pt;
-    border: 1px solid #404040;
-    border-bottom-color: transparent; }
+  margin: 0;
+  padding: 1em;
+  height: 40em; }
   .wrap form.social {
-    height: 30em;
-    overflow: hidden; }
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+    border: 1px solid #e4e1de;
+    border-radius: 0.5em;
+    background: #d8d5d0;
+    box-shadow: 0px 0px 15px #aaa398, 0px 0px 0px 1px #aaa398; }
     .wrap form.social div.social-sections {
       height: 100%; }
       .wrap form.social div.social-sections div.section {
@@ -1365,64 +1365,47 @@
         height: 100%;
         box-sizing: border-box; }
       .wrap form.social div.social-sections div.section.titles {
+        border-bottom-left-radius: 0.5em;
+        border-top-left-radius: 0.5em;
         width: 6%;
-        background: #333333; }
+        background: #404040;
+        border-right: 2px solid #e4e1de;
+        overflow: hidden; }
         .wrap form.social div.social-sections div.section.titles h3 {
           margin: 0;
           text-align: center; }
           .wrap form.social div.social-sections div.section.titles h3 span {
+            cursor: pointer;
             position: relative;
             display: block;
             font-weight: lighter;
             padding: 1em;
-            background: #333333;
             font-size: 18pt;
             color: #8c8c8c;
-            border: 1px solid #404040;
-            transition: background 0.1s, color 0.1s;
-            box-sizing: border-box; }
+            box-sizing: border-box;
+            border-bottom: 1px solid #1a1a1a;
+            border-top: 1px solid #4d4d4d; }
             .wrap form.social div.social-sections div.section.titles h3 span:hover {
-              background: #262626;
-              color: #e6e6e6;
-              cursor: pointer; }
-      .wrap form.social div.social-sections div.section.profile {
-        width: 7%;
-        background: #ee6049;
-        color: #333333;
-        padding: 1em;
-        z-index: 2;
-        box-shadow: 0px 0px 100px 0px black;
-        border: 1px solid #f28978;
-        border-right-color: #ea371a; }
-        .wrap form.social div.social-sections div.section.profile h1, .wrap form.social div.social-sections div.section.profile h3 {
-          font-weight: lighter;
-          font-family: "Open Sans";
-          margin: 0 0 1em 0; }
-        .wrap form.social div.social-sections div.section.profile h3 {
-          text-align: center; }
-        .wrap form.social div.social-sections div.section.profile h1 {
-          border: 1px solid #f07460;
-          padding: 1em; }
-          .wrap form.social div.social-sections div.section.profile h1 span[class*="fa-"] {
-            margin-right: 0.5em;
-            display: block;
-            width: 1em;
-            float: left; }
-        .wrap form.social div.social-sections div.section.profile li {
-          padding: 0.5em;
-          width: 100%;
-          text-align: center;
-          box-sizing: border-box; }
-        .wrap form.social div.social-sections div.section.profile a {
-          text-decoration: none;
-          color: inherit; }
+              color: #e6e6e6; }
+            .wrap form.social div.social-sections div.section.titles h3 span.fa-facebook:hover {
+              background: #4a66a0;
+              border-bottom: 1px solid #1a2337;
+              border-top: 1px solid #6580b8; }
+            .wrap form.social div.social-sections div.section.titles h3 span.fa-twitter:hover {
+              background: #55acee;
+              border-bottom: 1px solid #0f5f9b;
+              border-top: 1px solid #83c3f3; }
+            .wrap form.social div.social-sections div.section.titles h3 span.fa-google-plus:hover {
+              background: #dd4b39;
+              border-bottom: 1px solid #6b1c12;
+              border-top: 1px solid #e47365; }
+            .wrap form.social div.social-sections div.section.titles h3 span.fa-instagram:hover {
+              background: #46749a;
+              border-bottom: 1px solid #162531;
+              border-top: 1px solid #5d8eb6; }
       .wrap form.social div.social-sections div.section.fields {
-        z-index: 3;
-        width: 87%;
-        background: #d8d5d0;
-        padding: 2em;
-        border: 1px solid #efeeec;
-        box-shadow: 0px 0px 100px 0px rgba(0, 0, 0, 0.4); }
+        width: 94%;
+        padding: 2em; }
         .wrap form.social div.social-sections div.section.fields tr {
           position: relative;
           left: 100%;

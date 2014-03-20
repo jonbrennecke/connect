@@ -12,17 +12,20 @@
  */
 
 @import "./FontAwesome/font-awesome";
+@import "colors";
 
 $highlight: #ee6049;
 $gray: #d8d5d0;
 $dark: #333;
 $bg: $gray;
 
+// font awesome
 [class*="fa-"]:before {
 	font-family: 'FontAwesome', sans-serif;
 	-webkit-font-smoothing: subpixel-antialiased;
 }
 
+// adjust the margin so .wrap is adjacent to the left admin bar
 .folded #wpcontent {
 	margin-left: 36px;
 
@@ -34,20 +37,19 @@ $bg: $gray;
 
 .wrap {
 	margin: 0;
-
-	h2.page-title {
-		margin: 0;
-		background: $dark;
-		color: $highlight;
-		padding: 0.5em 5%;
-		font-size: 10pt;
-		border: 1px solid lighten($dark, 5%);
-		border-bottom-color: transparent;
-	}
+	padding: 1em;
+	height: 40em;
 
 	form.social {
-		height: 30em;
-		overflow: hidden;
+		width: 100%;
+		height: 100%;
+		position: relative;
+		z-index: 2;
+		border: 1px solid lighten($gray,5%);
+		border-radius: 0.5em;
+		background: $gray;
+		box-shadow: 0px 0px 15px rgba(darken($gray,20%),1), 
+					0px 0px 0px 1px rgba(darken($gray,20%),1);
 
 		div.social-sections {
 			height: 100%;
@@ -60,84 +62,52 @@ $bg: $gray;
 			}
 
 			div.section.titles {
+				border-bottom-left-radius: 0.5em;
+				border-top-left-radius: 0.5em;
 				width: 6%;
-				background: $dark;
+				background: lighten($dark,5%);
+				border-right: 2px solid lighten($gray,5%);
+				overflow: hidden;
 
 				h3 {
 					margin: 0;
 					text-align: center;
 				
 					span {
+						cursor: pointer;
 						position: relative;
 						display: block;
 						font-weight: lighter;
 						padding: 1em;
-						background: $dark;
 						font-size: 18pt;
 						color: lighten($dark,35%);
-						border: 1px solid lighten($dark, 5%);
-						transition: background 0.1s, color 0.1s;
 						box-sizing: border-box;
+						border-bottom: 1px solid darken($dark, 10%);
+						border-top: 1px solid lighten($dark, 10%);
 
 						&:hover {
-							background: darken($dark,5%);
 							color: lighten($dark,70%);
-							cursor: pointer;
 						}
+
+						@mixin account-hover {
+							@each $account, $color in $accounts {
+								&.fa-#{$account}:hover {
+									background: $color;
+									border-bottom: 1px solid darken($color, 30%);
+									border-top: 1px solid lighten($color, 10%);
+								}
+							}
+						}
+
+						@include account-hover;
 					}
 				}
-			}
-
-			div.section.profile {
-				width: 7%;
-				background: $highlight;
-				color: $dark;
-				padding: 1em;
-				z-index: 2;
-				box-shadow: 0px 0px 100px 0px rgba(#000,1);
-				border: 1px solid lighten($highlight,10%);
-				border-right-color: darken($highlight,10%);
-
-				h1, h3 {
-					font-weight: lighter;
-					font-family: "Open Sans";
-					margin: 0 0 1em 0;
-				}
-
-				h3 {
-					text-align: center;
-				}
-
-				h1 {
-					border: 1px solid lighten($highlight,5%);
-					padding: 1em;
-
-					span[class*="fa-"] {
-						margin-right: 0.5em;
-						display: block;
-						width: 1em;
-						float: left;
-					}
-				}
-
-				li {
-					padding: 0.5em;
-					width: 100%;
-					text-align: center;
-					box-sizing: border-box;
-				}
-
-				a { text-decoration: none; color: inherit; }
 			}
 
 			div.section.fields {
-				z-index: 3;
-				width: 87%;
-				background: $gray;
+				width: 94%;
 				padding: 2em;
-				border: 1px solid lighten($gray,10%);
-				box-shadow: 0px 0px 100px 0px rgba(#000,0.4);
-// 
+
 				tr {
 					position: relative;
 					left: 100%;

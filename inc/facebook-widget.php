@@ -9,8 +9,10 @@
  */
 
 
-// include the sdk class
-// @see https://github.com/facebook/facebook-php-sdk
+/** 
+ * include the sdk class
+ * @see https://github.com/facebook/facebook-php-sdk
+ */
 require_once 'facebook-sdk/facebook.php';
 
 class Facebook_Widget extends WP_Widget {
@@ -32,8 +34,6 @@ class Facebook_Widget extends WP_Widget {
 			'secret' => get_option('facebook-app-secret'),
 			'cookie' => true
 		));
-
-
 	}
 
 	/**
@@ -52,7 +52,7 @@ class Facebook_Widget extends WP_Widget {
 			try {
 				// Proceed with a logged in user who's authenticated.
 				$user_profile = $this->facebook->api('/me');
-				var_dump($user_profile);
+				// var_dump($user_profile);
 
 			} catch (FacebookApiException $e) {
 				error_log($e);
@@ -60,31 +60,12 @@ class Facebook_Widget extends WP_Widget {
 			}
 		}
 
-		var_dump($user);
+		// sanitize $instance
 
-		// Login or logout url will be needed depending on current user state.
-		// if ($user) {
-		// 	$logoutUrl = $facebook->getLogoutUrl();
-		// } else {
-		// 	$statusUrl = $facebook->getLoginStatusUrl();
-		// 	$loginUrl = $facebook->getLoginUrl();
-		// }
-
-		$loginUrl = $facebook->getLoginUrl(array(
-			'scope' => 'publish_stream,read_stream,offline_access,manage_pages',
-			'fbconnect' =>  1,
-			'redirect_uri' => 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']
-		));
-
-
-		// $instance = wp_parse_args( (array) $instance, array( 'screen_name' => 'twitterapi', 'count' => 1, 'class_name' => 'magnum-opus' ) );
-
-		// $tweets = $this->twitter_api->get_user_timeline( array( 
-		// 	'count' => $instance['count'],
-		// 	'screen_name' => $instance['screen_name']
-		// ));
-
-		// echo "<div class=\"{$instance['class_name']} twitter\">";
+		echo "<div class=\"hullabaloo facebook\">";
+		echo "<h1><span class='fa-facebook'></span></h1>";
+		echo "<h2>{$user_profile['name']}</h2>";
+		echo "<h3>{$user_profile['location']}</h3>";
 
 		// $this->do_profile_pic( $tweets[0]->user->profile_image_url );
 
@@ -92,8 +73,31 @@ class Facebook_Widget extends WP_Widget {
 
 		// $this->do_user_info_bar( $tweets[0]->user );
 			
-		// echo '</div>';
+		echo '</div>';
 
 	}
 
 }
+
+
+// Login or logout url will be needed depending on current user state.
+// if ($user) {
+// 	$logoutUrl = $facebook->getLogoutUrl();
+// } else {
+// 	$statusUrl = $facebook->getLoginStatusUrl();
+// 	$loginUrl = $facebook->getLoginUrl();
+// }
+
+// $loginUrl = $this->facebook->getLoginUrl(array(
+// 	'scope' => 'publish_stream,read_stream,offline_access,manage_pages',
+// 	'fbconnect' =>  1,
+// 	'redirect_uri' => 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']
+// ));
+
+
+// $instance = wp_parse_args( (array) $instance, array( 'screen_name' => 'twitterapi', 'count' => 1, 'class_name' => 'magnum-opus' ) );
+
+// $tweets = $this->twitter_api->get_user_timeline( array( 
+// 	'count' => $instance['count'],
+// 	'screen_name' => $instance['screen_name']
+// ));

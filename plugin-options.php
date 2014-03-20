@@ -41,11 +41,12 @@ function create_plugin_page() {
 					<div class="section titles">
 						<?php do_settings_sections_title( 'social_settings_page' ); ?>
 					</div>
-					<div class="section profile">
-						<!-- AJAX loaded personal profile information -->
-					</div>
 					<div class="section fields">
-						<!-- AJAX loaded input fields -->
+						<div class="inside">
+							<div class="profile">
+								<!-- AJAX loaded personal profile information -->
+							</div>		
+						</div>				
 					</div>
 				</div>
 				<p class="save"><input type="button" id="save" value="Save" /></p>
