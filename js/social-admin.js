@@ -11,11 +11,16 @@
  *
  */
 
+var social = social || { META : 'social namespace' };
+
 jQuery(document).ready( function () {
 	
 	// wrap everything in an anonymous function and call immediately
 	// this allows us to safely use variable '$' for jQuery in 'noConflict' mode
 	( function ( $ ) {
+
+		// default profile
+		var profile = new social.Profile();
 
 		var form = $('form.social'),
 			h3 = form.find('div.section.titles h3 span'),
@@ -39,14 +44,14 @@ jQuery(document).ready( function () {
 						url : ajaxurl,
 						data : { action : 'get_profile', sectionName : target  },
 						dataType : 'html',
-						success : function ( html ) {
-							form.find('div.section.profile').append( html );
+						success : function ( json ) {
+							var profile = new social.TwitterProfile( json );
 						},
 						error : ajaxError
 					});
 
 					// add the fields to the 'section-fields' div elements
-					form.find('div.section.fields')
+					form.find('div.section.fields ul.bg li.bottom')
 						.show()
 						.append( html )
 						.find('tr')
@@ -127,3 +132,6 @@ jQuery(document).ready( function () {
 function ajaxError( msg ){
 	console.log( msg );
 }
+
+
+

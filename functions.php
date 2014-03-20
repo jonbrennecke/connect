@@ -38,6 +38,7 @@ function add_actions() {
 		add_action('wp_ajax_get_settings_fields', 'social\get_settings_fields');
 		add_action('wp_ajax_save_settings_fields', 'social\save_settings_fields');
 		add_action('wp_ajax_get_profile', 'social\get_profile');
+
 	}
 
 	// front-end actions
@@ -64,7 +65,8 @@ function admin_enqueue_scripts() {
 	wp_enqueue_style('social-admin-css', plugins_url( '/social/css/social-admin-style.css', dirname(__FILE__)));
 
 	// admin javascript (needs jQuery UI)
-	wp_enqueue_script('social-js',plugins_url('/social/js/social-admin.js', dirname(__FILE__)), array('jquery','jquery-ui-core','jquery-effects-core') );
+	wp_enqueue_script('social-profile-js',plugins_url('/social/js/admin-profile.js', dirname(__FILE__)), array('jquery','jquery-ui-core','jquery-effects-core') );
+	wp_enqueue_script('social-admin-js',plugins_url('/social/js/social-admin.js', dirname(__FILE__)), array('social-profile-js') );
 
 }
 

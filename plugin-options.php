@@ -19,13 +19,24 @@ namespace social;
  *  register the admin-side plugin page
  */
 function add_plugin_page() {
-	add_plugins_page( 
+	$plugin_page = add_plugins_page( 
 		__('Social Plugin Options'), 
 		'Social Plugin Options', 
 		'edit_pages', 
 		'social_settings_page', 
 		'social\create_plugin_page' 
 	);
+
+	add_action( 'admin_head-'. $plugin_page, 'social\admin_head' );
+}
+
+/**
+*
+*
+*/
+function admin_head() {
+	$path = plugins_url( 'social', dirname(__FILE__) );
+	echo "<script type='text/javascript'>var PATH = \"{$path}\";</script>";
 }
 
 /**
@@ -34,22 +45,30 @@ function add_plugin_page() {
 function create_plugin_page() {
 	?>
 		<div class="wrap">
-			<?php screen_icon(); // TODO necessary? ?>
-			<!-- <h2 class="page-title">CONNECT Admin Panel</h2> -->
 			<form class="social" method="post" action="">				
 				<div class="social-sections">
 					<div class="section titles">
 						<?php do_settings_sections_title( 'social_settings_page' ); ?>
 					</div>
 					<div class="section fields">
-						<div class="inside">
-							<div class="profile">
-								<!-- AJAX loaded personal profile information -->
-							</div>		
-						</div>				
+						<ul class="bg">
+							<li class="bg top"></li>
+							<li class="bg mid">
+								<div class="profile_pic">
+									<div id="profile_pic"></div>
+								</div>
+								<div class="profile_info">
+									<h1 id="profile_name"></h1>
+									<h2 id="profile_status"></h2>
+								</div>
+								<div class="profile_stats">
+									<p class="save"><input type="button" id="save" value="Save" /></p>
+								</div>
+							</li>
+							<li class="bg bottom"></li>
+						</ul>
 					</div>
 				</div>
-				<p class="save"><input type="button" id="save" value="Save" /></p>
 			</form>
 		</div>
 	<?php
@@ -222,12 +241,7 @@ function twitter_profile(){
 	// TODO fix this to use either an option or correctly use 'verify_credential'
 	$user = $twitter->user( 'jonbrennecke' );
 
-	$str = "<h1><span class='fa-user'></span><span class='title'>{$user->name}</span></h1>";
-	$str .= "<h3><a href=\"{$user->url}\">@{$user->screen_name}</a> - ";
-	$str .= "{$user->description}</h3>";
-	$str .= "<ul><li>{$user->followers_count} Followers</li><li>{$user->friends_count} Friends</li><li>{$user->statuses_count} Tweets</li></ul>";
-
-	echo trim( preg_replace('/\s+/', ' ', $str));
+	echo json_encode($user);
 }
 
 /**

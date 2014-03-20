@@ -16,6 +16,7 @@
  */
 /* FONT PATH
  * -------------------------- */
+@import url("http://fonts.googleapis.com/css?family=Leckerli+One");
 @font-face {
   font-family: 'FontAwesome';
   src: url("./fonts/FontAwesome/fontawesome-webfont.eot?v=4.0.3");
@@ -1333,10 +1334,6 @@
 .fa-plus-square-o:before {
   content: "\f196"; }
 
-[class*="fa-"]:before {
-  font-family: 'FontAwesome', sans-serif;
-  -webkit-font-smoothing: subpixel-antialiased; }
-
 .folded #wpcontent {
   margin-left: 36px; }
   @media screen and (max-width: 782px) {
@@ -1354,8 +1351,8 @@
     position: relative;
     z-index: 2;
     border: 1px solid #e4e1de;
-    border-radius: 0.5em;
-    background: #d8d5d0;
+    border-radius: 10px;
+    background: #efeeec;
     box-shadow: 0px 0px 15px #aaa398, 0px 0px 0px 1px #aaa398; }
     .wrap form.social div.social-sections {
       height: 100%; }
@@ -1365,12 +1362,13 @@
         height: 100%;
         box-sizing: border-box; }
       .wrap form.social div.social-sections div.section.titles {
-        border-bottom-left-radius: 0.5em;
-        border-top-left-radius: 0.5em;
+        position: relative;
+        border-bottom-left-radius: 10px;
+        border-top-left-radius: 10px;
         width: 6%;
         background: #404040;
-        border-right: 2px solid #e4e1de;
-        overflow: hidden; }
+        overflow: hidden;
+        z-index: 1; }
         .wrap form.social div.social-sections div.section.titles h3 {
           margin: 0;
           text-align: center; }
@@ -1382,6 +1380,8 @@
             padding: 1em;
             font-size: 18pt;
             color: #8c8c8c;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
             box-sizing: border-box;
             border-bottom: 1px solid #1a1a1a;
             border-top: 1px solid #4d4d4d; }
@@ -1404,8 +1404,106 @@
               border-bottom: 1px solid #162531;
               border-top: 1px solid #5d8eb6; }
       .wrap form.social div.social-sections div.section.fields {
+        position: relative;
         width: 94%;
-        padding: 2em; }
+        padding: 0 5px;
+        z-index: 2;
+        box-shadow: -100px 0px 100px -100px #000; }
+        .wrap form.social div.social-sections div.section.fields ul.bg {
+          list-style-type: none;
+          margin: 0;
+          height: 100%; }
+          .wrap form.social div.social-sections div.section.fields ul.bg li.bg {
+            width: 100%;
+            margin: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box; }
+            .wrap form.social div.social-sections div.section.fields ul.bg li.bg.top {
+              background: #d8d5d0;
+              height: 10%;
+              border-bottom-left-radius: 10px;
+              border-bottom-right-radius: 10px;
+              border: 1px solid #c1bcb4;
+              border-top-color: transparent;
+              box-shadow: 0px -3px 3px -3px #c1bcb4 inset; }
+            .wrap form.social div.social-sections div.section.fields ul.bg li.bg.mid {
+              height: 20%; }
+              .wrap form.social div.social-sections div.section.fields ul.bg li.bg.mid div[class*="profile_"] {
+                position: relative;
+                float: left;
+                margin: 0;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+                height: 100%; }
+                .wrap form.social div.social-sections div.section.fields ul.bg li.bg.mid div[class*="profile_"].profile_pic {
+                  width: 15%; }
+                  .wrap form.social div.social-sections div.section.fields ul.bg li.bg.mid div[class*="profile_"].profile_pic div {
+                    position: absolute;
+                    height: 120px;
+                    width: 120px;
+                    background: #efeeec;
+                    border: 1px solid #c1bcb4;
+                    border-radius: 5px;
+                    bottom: 10px;
+                    left: 50%;
+                    margin-left: -60px;
+                    box-shadow: 0px 0px 5px #c1bcb4;
+                    overflow: hidden; }
+                    .wrap form.social div.social-sections div.section.fields ul.bg li.bg.mid div[class*="profile_"].profile_pic div img {
+                      width: 100%;
+                      height: 100%; }
+                .wrap form.social div.social-sections div.section.fields ul.bg li.bg.mid div[class*="profile_"].profile_info {
+                  width: 65%; }
+                  .wrap form.social div.social-sections div.section.fields ul.bg li.bg.mid div[class*="profile_"].profile_info h1 {
+                    font-family: "Leckerli One", cursive;
+                    font-weight: normal;
+                    font-size: 24pt;
+                    color: #333333;
+                    text-shadow: 0px 0px 1px #787164;
+                    margin: 1em 0 0 0; }
+                  .wrap form.social div.social-sections div.section.fields ul.bg li.bg.mid div[class*="profile_"].profile_info h2 {
+                    font-size: 12pt;
+                    margin: 0;
+                    font-style: italic;
+                    color: #787164; }
+                .wrap form.social div.social-sections div.section.fields ul.bg li.bg.mid div[class*="profile_"].profile_stats {
+                  width: 20%; }
+                  .wrap form.social div.social-sections div.section.fields ul.bg li.bg.mid div[class*="profile_"].profile_stats p.save {
+                    position: absolute;
+                    height: 60px;
+                    width: 150px;
+                    left: 50%;
+                    top: 50%;
+                    margin-left: -75px;
+                    margin-top: -30px; }
+                    .wrap form.social div.social-sections div.section.fields ul.bg li.bg.mid div[class*="profile_"].profile_stats p.save input {
+                      border-radius: 10px;
+                      height: 100%;
+                      width: 100%;
+                      margin: 0;
+                      background: #63c56a;
+                      background: -webkit-linear-gradient(top, #88d38e, #63c56a);
+                      color: #358d3b;
+                      border: none;
+                      font-weight: bolder;
+                      text-shadow: 0px 0px 5px #d3eed5;
+                      border: 1px solid #42b34a;
+                      transition: box-shadow 0.3s, background 0.3s;
+                      outline: 0; }
+                      .wrap form.social div.social-sections div.section.fields ul.bg li.bg.mid div[class*="profile_"].profile_stats p.save input:hover {
+                        box-shadow: 0px 0px 5px #63c56a; }
+                      .wrap form.social div.social-sections div.section.fields ul.bg li.bg.mid div[class*="profile_"].profile_stats p.save input:active {
+                        background: -webkit-linear-gradient(top, #63c56a, #88d38e); }
+            .wrap form.social div.social-sections div.section.fields ul.bg li.bg.bottom {
+              background: #d8d5d0;
+              height: 70%;
+              border-top-left-radius: 10px;
+              border-top-right-radius: 10px;
+              border: 1px solid #c1bcb4;
+              border-bottom-color: transparent;
+              box-shadow: 0px 3px 3px -3px #c1bcb4 inset; }
         .wrap form.social div.social-sections div.section.fields tr {
           position: relative;
           left: 100%;
@@ -1436,3 +1534,6 @@
 @font-face {
   font-family: "Canter";
   src: url("./fonts/Actual/ActualBook.otf"); }
+[class*="fa-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+  -webkit-font-smoothing: subpixel-antialiased; }

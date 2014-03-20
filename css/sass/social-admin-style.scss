@@ -14,15 +14,14 @@
 @import "./FontAwesome/font-awesome";
 @import "colors";
 
-$highlight: #ee6049;
 $gray: #d8d5d0;
 $dark: #333;
-$bg: $gray;
+$green: #63c56a;
 
-// font awesome
-[class*="fa-"]:before {
-	font-family: 'FontAwesome', sans-serif;
-	-webkit-font-smoothing: subpixel-antialiased;
+@mixin boxSizing( $sizing ) {
+	-webkit-box-sizing: $sizing;
+	-moz-box-sizing: $sizing;
+	box-sizing: $sizing;
 }
 
 // adjust the margin so .wrap is adjacent to the left admin bar
@@ -46,8 +45,8 @@ $bg: $gray;
 		position: relative;
 		z-index: 2;
 		border: 1px solid lighten($gray,5%);
-		border-radius: 0.5em;
-		background: $gray;
+		border-radius: 10px;
+		background: lighten($gray,10%);
 		box-shadow: 0px 0px 15px rgba(darken($gray,20%),1), 
 					0px 0px 0px 1px rgba(darken($gray,20%),1);
 
@@ -62,12 +61,13 @@ $bg: $gray;
 			}
 
 			div.section.titles {
-				border-bottom-left-radius: 0.5em;
-				border-top-left-radius: 0.5em;
+				position: relative;
+				border-bottom-left-radius: 10px;
+				border-top-left-radius: 10px;
 				width: 6%;
 				background: lighten($dark,5%);
-				border-right: 2px solid lighten($gray,5%);
 				overflow: hidden;
+				z-index: 1;
 
 				h3 {
 					margin: 0;
@@ -81,7 +81,7 @@ $bg: $gray;
 						padding: 1em;
 						font-size: 18pt;
 						color: lighten($dark,35%);
-						box-sizing: border-box;
+						@include boxSizing(border-box);
 						border-bottom: 1px solid darken($dark, 10%);
 						border-top: 1px solid lighten($dark, 10%);
 
@@ -105,8 +105,131 @@ $bg: $gray;
 			}
 
 			div.section.fields {
+				position: relative;
 				width: 94%;
-				padding: 2em;
+				padding: 0 5px;
+				z-index: 2;
+				box-shadow: -100px 0px 100px -100px #000;
+
+				ul.bg {
+					list-style-type: none;
+					margin: 0;
+					height: 100%;
+
+					li.bg {
+						width: 100%;
+						margin: 0;
+						@include boxSizing(border-box);
+
+						&.top {
+							background: $gray;
+							height: 10%;
+							border-bottom-left-radius: 10px;
+							border-bottom-right-radius: 10px;
+							border: 1px solid darken($gray,10%);
+							border-top-color: transparent;
+							box-shadow: 0px -3px 3px -3px darken($gray,10%) inset;
+						}
+						&.mid {
+							height: 20%;
+
+							div[class*="profile_"] {
+								position: relative;
+								float: left;
+								margin: 0;
+								@include boxSizing(border-box);
+								height: 100%;
+
+								&.profile_pic {
+									width: 15%;
+
+									div {
+										position: absolute;
+										height: 120px;
+										width: 120px;
+										background: lighten($gray,10%);
+										border: 1px solid darken($gray,10%);
+										border-radius: 5px;
+										bottom: 10px;
+										left: 50%;
+										margin-left: -60px;
+										box-shadow: 0px 0px 5px darken($gray,10%);
+										overflow: hidden;
+
+										img {
+											width: 100%;
+											height: 100%;
+										}
+									}
+								}
+								&.profile_info {
+									width: 65%;
+
+									h1 {
+										font-family: "Leckerli One", cursive;
+										font-weight: normal;
+										font-size: 24pt;
+										color: $dark;
+										text-shadow: 0px 0px 1px darken($gray,40%);
+										margin: 1em 0 0 0;
+									}
+									h2 {
+										font-size: 12pt;
+										margin: 0;
+										font-style: italic;
+										color: darken($gray,40%);
+									}
+								}
+								&.profile_stats {
+									width: 20%;
+
+									p.save {
+										position: absolute;
+										height: 60px;
+										width: 150px;
+										left: 50%;
+										top: 50%;
+										margin-left: -75px;
+										margin-top: -30px;
+
+										input {
+											border-radius: 10px;
+											height: 100%;
+											width: 100%;
+											margin: 0;
+											background: $green;
+											background: -webkit-linear-gradient(top,lighten($green,10%),$green);
+											color: darken($green,20%);
+											border: none;
+											font-weight: bolder;
+											text-shadow: 0px 0px 5px lighten($green,30%);
+											border: 1px solid darken($green,10%);
+											transition: box-shadow 0.3s, background 0.3s;
+											outline: 0;
+
+											&:hover {
+												box-shadow: 0px 0px 5px $green;
+											}
+
+											&:active {
+												background: -webkit-linear-gradient(top,$green,lighten($green,10%));
+											}
+										}
+									}
+								}
+							}
+						}
+						&.bottom {
+							background: $gray;
+							height: 70%;
+							border-top-left-radius: 10px;
+							border-top-right-radius: 10px;
+							border: 1px solid darken($gray,10%);
+							border-bottom-color: transparent;
+							box-shadow: 0px 3px 3px -3px darken($gray,10%) inset;
+						}
+					}
+				}
 
 				tr {
 					position: relative;
@@ -152,4 +275,12 @@ $bg: $gray;
 @font-face {
 	font-family: "Canter";
 	src: url("./fonts/Actual/ActualBook.otf");
+}
+
+@import url("http://fonts.googleapis.com/css?family=Leckerli+One");
+
+// font awesome
+[class*="fa-"]:before {
+	font-family: 'FontAwesome', sans-serif;
+	-webkit-font-smoothing: subpixel-antialiased;
 }
