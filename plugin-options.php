@@ -225,6 +225,10 @@ function get_profile() {
 	die();
 }
 
+/**
+ * AJAX function to retrieve a JSON string of the user's profile
+ *
+ */
 function twitter_profile(){
 
 	require_once( 'inc/twitter-api.php' );
