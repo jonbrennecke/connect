@@ -12,46 +12,13 @@
  */
 
 @import "./FontAwesome/font-awesome";
+@import "admin_mixins";
 @import "fonts";
 @import "colors";
 
 $gray: #d8d5d0;
 $dark: #333;
 $green: #63c56a;
-
-@mixin boxSizing( $sizing ) {
-	-webkit-box-sizing: $sizing;
-	-moz-box-sizing: $sizing;
-	box-sizing: $sizing;
-}
-
-@mixin nav-dots {
-	ul.nav-dots {
-		list-style-type: none;
-		width: 10em;
-		height: 1em;
-		margin: 0 auto;
-
-		li {
-			cursor: pointer;
-			display: inline-block;
-			border: 1px solid $dark;
-			border-radius: 50%;	
-			height: 0.5em;
-			width: 0.5em;
-			margin: 0.5em;
-			transition: background 0.2s;
-		
-			&:hover {
-				background: darken($gray,30%);
-			}
-
-			&.selected {
-				background: darken($gray,50%);
-			}
-		}
-	}
-}
 
 // adjust the margin so .wrap is adjacent to the left admin bar
 .folded #wpcontent {
@@ -221,14 +188,12 @@ $green: #63c56a;
 							padding: 1em;
 
 							div#api-tool-tip {
-								position: relative;
 								padding: 1em;
 								font-size: 12pt;
 								color: darken($gray,45%);
 								font-style: italic;
 								text-align: center;
-								width: 80%;
-								margin: 0 auto;
+								@include center-relative(80%);
 
 								@include nav-dots;
 
@@ -293,9 +258,7 @@ $green: #63c56a;
 										}
 
 										table {
-											position: relative;
-											width: 45em;
-											margin: 0 auto;
+											@include center-relative(45em);
 
 											tr {
 												position: relative;
