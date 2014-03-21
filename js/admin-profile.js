@@ -14,7 +14,7 @@ jQuery(document).ready( function () {
 			}
 			else {
 				this.image = PATH + "/images/llama.jpg";
-				this.name = "Llama McWordpress";
+				this.name = "Sociallama";
 				this.status = 'Connect your accounts by clicking one of the icons to the left!';
 			}
 		};

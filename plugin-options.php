@@ -61,9 +61,7 @@ function create_plugin_page() {
 									<h1 id="profile_name"></h1>
 									<h2 id="profile_status"></h2>
 								</div>
-								<div class="profile_stats">
-									<p class="save"><input type="button" id="save" value="Save" /></p>
-								</div>
+								<div class="profile_stats"></div>
 							</li>
 							<li class="bg bottom"></li>
 						</ul>
@@ -125,9 +123,7 @@ function register_options() {
 	$sections = array( 
 		'twitter' => array(
 			'twitter-api-key' => 'API Key',
-			'twitter-api-secret' => 'API Secret',
-			'twitter-access-token' => 'Access Token',
-			'twitter-access-secret' => 'Access Secret'
+			'twitter-api-secret' => 'API Secret'
 		),
 		'facebook' => array(
 			'facebook-app-id' => 'App ID',
@@ -161,7 +157,7 @@ function register_options() {
  *
  */
 function input_callback( $args ){
-	printf('<input type="text" id="%s" name="%s" value="%s" />', $args['id'], $args['id'], $args['value']);
+	printf('<input type="text" spellcheck="false" id="%s" name="%s" value="%s" />', $args['id'], $args['id'], $args['value']);
 }
 
 /**
@@ -174,7 +170,7 @@ function get_settings_fields() {
 		switch ( $_POST['sectionName'] ) {
 
 			case 'twitter':
-				do_settings_fields( 'social_settings_page', 'twitter_section' );
+				do_tool_tip();
 				break;
 
 			case 'facebook':
@@ -194,6 +190,28 @@ function get_settings_fields() {
 		}
 	}
 	die();
+}
+
+function do_tool_tip() {
+	?>
+	<div id='api-tool-tip'>
+		<h1>Welcome</h1>
+		<ul class="nav-dots"><li></li><li></li><li></li></ul>
+		<div class="tool-tip_container">
+			<div class="tool-tip_container_abs">
+				<div class="tool-tip r"><p>To connect Wordpress with Twitter, <em>API keys</em> are used to authenticate requests for your tweets. API keys are basically like passwords that are safer to transfer over the web.</p></div>
+				<div class="tool-tip r"><p>To begin, you will need to register your Wordpress website with Twitter. Open <a target="_blank" href='https://apps.twitter.com/'>this link</a> to do that, then click on "Create New App".</p></div>
+				<div class="tool-tip r">
+					<p>You're almost done, just copy and paste the keys into the fields below and click "Save".</p>
+					<table class="form-table">
+						<?php do_settings_fields( 'social_settings_page', 'twitter_section' ); ?>
+					</table>
+					<p class="save"><input type="button" id="save" value="Save" /></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php
 }
 
 /**

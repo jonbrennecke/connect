@@ -46,92 +46,57 @@ jQuery(document).ready( function () {
 						dataType : 'html',
 						success : function ( json ) {
 							var profile = new social.TwitterProfile( json );
-						},
-						error : ajaxError
+						}
 					});
 
 					// add the fields to the 'section-fields' div elements
 					form.find('div.section.fields ul.bg li.bottom')
 						.show()
 						.append( html )
-						.find('tr')
-						.each( function ( i ) {
 
-							// animate each row sliding in at an incremental delay
-							$(this)
-								.delay( i * 100 )
-								.animate( { left : '0%' }, { duration : 300, easing : 'easeInOutQuad' } );
-						});
+					var dots = $("#api-tool-tip").find("ul.nav-dots li"),
+						tips = $("#api-tool-tip").find("div.tool-tip_container div.tool-tip");
+					
+					function swap( index ){
 
-					form.find('div.section.fields input')
+						tips.filter(".c").addClass("l",500,"easeInOutQuad").removeClass("c");
+						
+						$( tips.get( index ) ).removeClass("l r").addClass("c", 500, "easeInOutQuad");
+
+						$( dots ).removeClass( 'selected' );
+						$( dots.get(index) ).addClass('selected',500);
+
+						if ( index + 1 === tips.length ) {
+
+							$( tips.get( index ) )
+								.find('tr')
+								.removeClass('c')
+								.addClass('r')
+								.each( function ( i ) {
+
+									// animate each row sliding in at an incremental delay
+									$(this).delay( i * 100 ).removeClass('r').addClass('c',1000,"easeInOutQuad");
+								});
+						}
+					}
+
+					swap(0);
+
+					dots.click( function ( e ) {
+						swap( dots.index(this) );
+					});
+
+					// 
+					form.find('div.tool-tip table input')
 						.focus( function () {
 							$(this).parent().parent().find('th').addClass('th-focus',250);
 						})
 						.blur( function () {
 							$(this).parent().parent().find('th').removeClass('th-focus',250);
 						});
-				},
-				error : ajaxError
+				}
 			});
-		}); // end onclick actions for Twitter/Facebook/Google+
-
-		// // on form change
-		// $('.wrap form.social').on('change', function(){
-
-		// 	// animate submit button
-		// 	$(this)
-		// 		.find('p.save')
-		// 		.animate( { height : '4em'}, { duration : 200, easing : 'easeInQuad' } );
-
-		// });
-
-		// // form submit
-		// $('.wrap form.social p.save').on('click', function(){
-
-		// 	$.ajax({
-		// 		type : 'post',
-		// 		url : ajaxurl,
-		// 		data : { 
-		// 			action : 'save_settings_fields', 
-		// 			data : { 
-		// 				form : $('.wrap form.social').serialize(),
-		// 				section : activeSection.className
-		// 			}  
-		// 		},
-		// 		dataType : 'html',
-		// 		success : function ( response ) {
-
-		// 			// if successfully saved, the servers responds '1'
-		// 			// otherwise the response from the server is blank
-		// 			if ( response ) {
-
-		// 				// make the save button green
-		// 				$('input#save')
-		// 					.animate( { 'backgroundColor' : '#00a651' }, { duration : 200 } )
-		// 					.attr( 'value', 'Saved' )
-		// 					.parent()
-		// 					.delay( 1000 )
-		// 					.animate( { height : 0 }, { duration : 300, easing : 'easeInQuad' } )
-		// 					.promise()
-		// 					.done( function(){
-		// 						$('input#save').css('backgroundColor','#222').attr('value','Save');
-		// 					});
-							
-		// 			}
-		// 		},
-		// 		error : function () {
-		// 			console.error( 'AJAX request to server failed.' );
-		// 		}
-		// 	});
-
-		// });
+		}); // end onclick actions
 
 	})( jQuery );
 });
-
-function ajaxError( msg ){
-	console.log( msg );
-}
-
-
-
