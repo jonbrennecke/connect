@@ -165,54 +165,69 @@ function input_callback( $args ){
  */
 function get_settings_fields() {
 	
-	if( isset( $_POST['sectionName'] ) && !empty( $_POST['sectionName'] ) ) {
+	if( isset( $_POST['sectionName'] ) && !empty( $_POST['sectionName'] ) && validate_section( $_POST['sectionName'] ) ) {
 
-		switch ( $_POST['sectionName'] ) {
+		$tooltips = array(
+			"twitter" => array(
+				0 => "To connect Wordpress with Twitter, <em>API keys</em> are used to authenticate requests for your tweets. API keys are basically like passwords that are safer to transfer over the web.",
+				1 => "To begin, you will need to register your Wordpress website with Twitter. Open <a target='_blank' href='https://apps.twitter.com/'>this link</a> to do that, then click on 'Create New App'.",
+				2 => "You're almost done, just copy and paste the keys into the fields below and click <em>'Save'</em>."
+			),
+			"facebook" => array(
+				0 => "To connect Wordpress with Facebook, <em>API keys</em> are used to authenticate requests for your tweets. API keys are basically like passwords that are safer to transfer over the web.",
+				1 => "To begin, you will need to register your Wordpress website with Facebook. Open <a target='_blank' href='https://apps.twitter.com/'>this link</a> to do that, then click on 'Create New App'.",
+				2 => "You're almost done, just copy and paste the keys into the fields below and click <em>'Save'</em>."
+			),
+			"google" => array(
+			),
+			"instagram" => array(
+			)
+		);
 
-			case 'twitter':
-				do_tool_tip();
-				break;
+		?>
+		<div id="api-tool-tip">
+			<h1>Welcome</h1>
+			<?php echo "<ul class='nav-dots'>" . str_repeat("<li></li>", count( $tooltips[ $_POST['sectionName'] ] ) ) . "</ul>"; ?>
+			<div class="tool-tip_container">
+				<div class="tool-tip_container_abs">
+					<?php 
 
-			case 'facebook':
-				do_settings_fields( 'social_settings_page', 'facebook_section' );
-				break;
+						//  echo the tool tip text (say that 10 times fast!)
+						foreach ($tooltips[ $_POST['sectionName'] ] as $key => $tip) {
+							echo "<div class='tool-tip r'><p>{$tip}</p><span class='prev'></span><span class='next'></span>";
+							if ( $key + 1 == count($tooltips[ $_POST['sectionName'] ]) ) {
+								echo "<table class='form-table'>";
+								get_inputs( $_POST['sectionName'] );
+								echo "</table><p class='save'><input type='button' id='save' value='Save' /></p>";
+							}
+							echo "</div>";
+						}
 
-			case 'google':
-				do_settings_fields( 'social_settings_page', 'google_section' );
-				break;
-
-			case 'instagram':
-				do_settings_fields( 'social_settings_page', 'instagram_section' );
-				break;
-			
-			default:
-				break;
-		}
-	}
-	die();
-}
-
-function do_tool_tip() {
-	?>
-	<div id='api-tool-tip'>
-		<h1>Welcome</h1>
-		<ul class="nav-dots"><li></li><li></li><li></li></ul>
-		<div class="tool-tip_container">
-			<div class="tool-tip_container_abs">
-				<div class="tool-tip r"><p>To connect Wordpress with Twitter, <em>API keys</em> are used to authenticate requests for your tweets. API keys are basically like passwords that are safer to transfer over the web.</p></div>
-				<div class="tool-tip r"><p>To begin, you will need to register your Wordpress website with Twitter. Open <a target="_blank" href='https://apps.twitter.com/'>this link</a> to do that, then click on "Create New App".</p></div>
-				<div class="tool-tip r">
-					<p>You're almost done, just copy and paste the keys into the fields below and click "Save".</p>
-					<table class="form-table">
-						<?php do_settings_fields( 'social_settings_page', 'twitter_section' ); ?>
-					</table>
-					<p class="save"><input type="button" id="save" value="Save" /></p>
+					?>
 				</div>
 			</div>
 		</div>
-	</div>
 	<?php
+	}
+
+	die();
 }
+
+function get_inputs( $section ){
+	if ( validate_section( $section ) ) {
+		do_settings_fields( 'social_settings_page', $section . '_section' );
+	}
+}
+
+function validate_section( $section ) {
+	return in_array( $section, array( 
+		'twitter', 
+		'facebook', 
+		'instagram', 
+		'google' 
+	));
+}
+
 
 /**
  * AJAX function to retrieve the user's personal profile

@@ -81,9 +81,7 @@ $green: #63c56a;
 						border-bottom: 1px solid darken($dark, 10%);
 						border-top: 1px solid lighten($dark, 10%);
 
-						&:hover {
-							color: lighten($dark,70%);
-						}
+						&:hover { color: lighten($dark,70%); }
 
 						@mixin account-hover {
 							@each $account, $color in $accounts {
@@ -133,22 +131,19 @@ $green: #63c56a;
 								position: relative;
 								float: left;
 								margin: 0;
-								@include boxSizing(border-box);
 								height: 100%;
+								@include boxSizing(border-box);
 
 								&.profile_pic {
 									width: 15%;
 
 									div {
-										position: absolute;
+										@include center-absolute(120px);
 										height: 120px;
-										width: 120px;
 										background: lighten($gray,10%);
 										border: 1px solid lighten($gray,10%);
 										border-radius: 5px;
 										bottom: 10px;
-										left: 50%;
-										margin-left: -60px;
 										box-shadow: 0px 0px 8px darken($gray,15%),
 													0px 0px 0px 1px darken($gray,10%);
 										overflow: hidden;
@@ -231,12 +226,9 @@ $green: #63c56a;
 										}
 
 										p.save {
-											position: absolute;
+											@include center-absolute(150px);
 											height: 40px;
-											width: 150px;
-											left: 50%;
 											top: 100%;
-											margin-left: -75px;
 
 											input {
 												border-radius: 5px;
@@ -252,8 +244,6 @@ $green: #63c56a;
 												outline: 0;
 
 												&:hover { box-shadow: 0px 1px 0px darken($green,20%); }
-
-												&:active {}
 											}
 										}
 
@@ -289,7 +279,6 @@ $green: #63c56a;
 												}	
 
 												td {
-
 													input {
 														position: relative;
 														width: 10em;
