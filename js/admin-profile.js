@@ -3,6 +3,8 @@ var social = social || { META : 'social namespace' };
 jQuery(document).ready( function () {
 	( function ( $ ) {
 
+		"use strict";
+
 		/**
 		 * create a user profile from the server's response
 		 *

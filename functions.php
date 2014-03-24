@@ -95,4 +95,29 @@ function register_widgets() {
 	register_widget( 'GPlus_Widget' ); 
 }
 
+/**
+ *  register the admin-side plugin page
+ */
+function add_plugin_page() {
+	$plugin_page = add_plugins_page( 
+		__('Social Plugin Options'), 
+		'Social Plugin Options', 
+		'edit_pages', 
+		'social_settings_page', 
+		'social\create_plugin_page' 
+	);
+
+	add_action( 'admin_head-'. $plugin_page, 'social\admin_head' );
+}
+
+/**
+ * to load images and other resources, javascript needs to know where everything's located. 
+ * So we pass JS a PATH variable in the admin <head>
+ *
+ */
+function admin_head() {
+	$path = plugins_url( 'social', dirname(__FILE__) );
+	echo "<script type='text/javascript'>var PATH = \"{$path}\";</script>";
+}
+
 ?>

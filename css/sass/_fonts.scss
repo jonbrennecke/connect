@@ -1,4 +1,4 @@
-@import url("./FontAwesome/font-awesome");
+@import "FontAwesome/font-awesome";
 
 // font awesome
 [class*="fa-"]:before {
@@ -19,4 +19,9 @@
 // 	src: url("./fonts/Actual/ActualBook.otf");
 // }
 
-@import url("http://fonts.googleapis.com/css?family=Leckerli+One");
+// @import url("http://fonts.googleapis.com/css?family=Leckerli+One");
+
+@font-face {
+	font-family: "Leckerli";
+	src : url("./fonts/Leckerli/Leckerli.woff");
+}

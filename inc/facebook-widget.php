@@ -51,10 +51,9 @@ class Facebook_Widget extends WP_Widget {
 		if ($user) {
 			try {
 				// Proceed with a logged in user who's authenticated.
-				$user_profile = $this->facebook->api('/me');
-				// var_dump($user_profile);
+				$statuses = $this->facebook->api( '/me/statuses/' );
 
-			} catch (FacebookApiException $e) {
+			} catch ( FacebookApiException $e ) {
 				error_log($e);
 				$user = null;
 			}
@@ -64,40 +63,26 @@ class Facebook_Widget extends WP_Widget {
 
 		echo "<div class=\"hullabaloo facebook\">";
 		echo "<h1><span class='fa-facebook'></span></h1>";
-		echo "<h2>{$user_profile['name']}</h2>";
-		echo "<h3>{$user_profile['location']}</h3>";
-
-		// $this->do_profile_pic( $tweets[0]->user->profile_image_url );
-
-		// $this->do_tweet_text( $tweets[0]->text, $tweets[0]->user, $tweets[0]->entities ); 
-
-		// $this->do_user_info_bar( $tweets[0]->user );
-			
+		echo "<h2>{$statuses['data'][0]['from']['name']}</h2>";
+		echo "<h3>\"{$statuses['data'][0]['message']}\"</h3>";
 		echo '</div>';
 
 	}
 
+	public function login_redirect( ) {
+
+		// get user ID
+		$user = $this->facebook->getUser();
+
+		$loginUrl = $this->facebook->getLoginUrl( array(
+			'scope' => 'read_stream,offline_access',
+			'fbconnect' => 1,
+			'redirect_uri' => 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'],
+			'display' => 'popup'
+		));
+	
+		return $loginUrl;
+	}
+
+
 }
-
-
-// Login or logout url will be needed depending on current user state.
-// if ($user) {
-// 	$logoutUrl = $facebook->getLogoutUrl();
-// } else {
-// 	$statusUrl = $facebook->getLoginStatusUrl();
-// 	$loginUrl = $facebook->getLoginUrl();
-// }
-
-// $loginUrl = $this->facebook->getLoginUrl(array(
-// 	'scope' => 'publish_stream,read_stream,offline_access,manage_pages',
-// 	'fbconnect' =>  1,
-// 	'redirect_uri' => 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']
-// ));
-
-
-// $instance = wp_parse_args( (array) $instance, array( 'screen_name' => 'twitterapi', 'count' => 1, 'class_name' => 'magnum-opus' ) );
-
-// $tweets = $this->twitter_api->get_user_timeline( array( 
-// 	'count' => $instance['count'],
-// 	'screen_name' => $instance['screen_name']
-// ));

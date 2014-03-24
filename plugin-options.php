@@ -15,60 +15,37 @@
 
 namespace social;
 
-/**
- *  register the admin-side plugin page
- */
-function add_plugin_page() {
-	$plugin_page = add_plugins_page( 
-		__('Social Plugin Options'), 
-		'Social Plugin Options', 
-		'edit_pages', 
-		'social_settings_page', 
-		'social\create_plugin_page' 
-	);
-
-	add_action( 'admin_head-'. $plugin_page, 'social\admin_head' );
-}
-
-/**
-*
-*
-*/
-function admin_head() {
-	$path = plugins_url( 'social', dirname(__FILE__) );
-	echo "<script type='text/javascript'>var PATH = \"{$path}\";</script>";
-}
 
 /**
  * create the content of the admin-side plugin options page
  */
 function create_plugin_page() {
 	?>
-		<div class="wrap">
-			<form class="social" method="post" action="">				
-				<div class="social-sections">
-					<div class="section titles">
-						<?php do_settings_sections_title( 'social_settings_page' ); ?>
-					</div>
-					<div class="section fields">
-						<ul class="bg">
-							<li class="bg top"></li>
-							<li class="bg mid">
-								<div class="profile_pic">
-									<div id="profile_pic"></div>
-								</div>
-								<div class="profile_info">
-									<h1 id="profile_name"></h1>
-									<h2 id="profile_status"></h2>
-								</div>
-								<div class="profile_stats"></div>
-							</li>
-							<li class="bg bottom"></li>
-						</ul>
-					</div>
+	<div class="wrap">
+		<form class="social" method="post" action="">				
+			<div class="social-sections">
+				<div class="section titles">
+					<?php do_settings_sections_title( 'social_settings_page' ); ?>
 				</div>
-			</form>
-		</div>
+				<div class="section fields">
+					<ul class="bg">
+						<li class="bg top"></li>
+						<li class="bg mid">
+							<div class="profile_pic">
+								<div id="profile_pic"></div>
+							</div>
+							<div class="profile_info">
+								<h1 id="profile_name"></h1>
+								<h2 id="profile_status"></h2>
+							</div>
+							<div class="profile_stats"></div>
+						</li>
+						<li class="bg bottom"></li>
+					</ul>
+				</div>
+			</div>
+		</form>
+	</div>
 	<?php
 }
 
@@ -167,8 +144,7 @@ function get_settings_fields() {
 	
 	if( isset( $_POST['sectionName'] ) && !empty( $_POST['sectionName'] ) && validate_section( $_POST['sectionName'] ) ) {
 
-		$tooltips = array(
-			"twitter" => array(
+		$tooltips = array( array(
 				0 => "To connect Wordpress with Twitter, <em>API keys</em> are used to authenticate requests for your tweets. API keys are basically like passwords that are safer to transfer over the web.",
 				1 => "To begin, you will need to register your Wordpress website with Twitter. Open <a target='_blank' href='https://apps.twitter.com/'>this link</a> to do that, then click on 'Create New App'.",
 				2 => "You're almost done, just copy and paste the keys into the fields below and click <em>'Save'</em>."
@@ -181,6 +157,9 @@ function get_settings_fields() {
 			"google" => array(
 			),
 			"instagram" => array(
+				0 => "To connect Wordpress with Instagram, <em>API keys</em> are used to authenticate requests for your tweets. API keys are basically like passwords that are safer to transfer over the web.",
+				1 => "To begin, you will need to register your Wordpress website with Instagram. Open <a target='_blank' href='http://instagram.com/developer/'>this link</a> to do that, then click on 'Register Your Application'.",
+				2 => "You're almost done, just copy and paste the keys into the fields below and click <em>'Save'</em>."
 			)
 		);
 
@@ -289,27 +268,62 @@ function save_settings_fields() {
 	if( isset( $_POST['data'] ) && !empty( $_POST['data'] ) && is_array( $_POST['data'] ) 
 		&& array_key_exists('form', $_POST['data']) && array_key_exists('section', $_POST['data']) ) {
 			
-			// convert the jQuery serialized array to a PHP array
-			$params = array();
-			parse_str( $_POST['data']['form'], $params );
+		// convert the jQuery serialized array to a PHP array
+		$params = array();
+		parse_str( $_POST['data']['form'], $params );
 
-			// if the serialized form data matches $wp_settings_fields, then update the options in the database
+		// if the serialized form data matches $wp_settings_fields, then update the options in the database
 
-			global $wp_settings_fields;
+		global $wp_settings_fields;
 
-			$section = $_POST['data']['section'] . '_section';
+		$section = $_POST['data']['section'] . '_section';
 
-			if ( array_key_exists( $section, $wp_settings_fields['social_settings_page'] ) ) {
-				foreach ($params as $option => $value) {
-					if( array_key_exists($option, $wp_settings_fields['social_settings_page'][ $section ] ) ) {
-						
-						// finally, update the option in the WP database
-						echo update_option( $option, $value );
+		if ( array_key_exists( $section, $wp_settings_fields['social_settings_page'] ) ) {
+			foreach ($params as $option => $value) {
+				if( array_key_exists($option, $wp_settings_fields['social_settings_page'][ $section ] ) ) {
+					
+					// update the option in the WP database
+					// returns true if the option has changed
+					if ( update_option( $option, $value ) ) {
+						login_redirect( $_POST['data']['section'] );
 					}
 				}
 			}
+		}
+
 	}
 	die();
+}
+
+function login_redirect( $section ) {
+	switch ( $section ) {
+
+		case 'twitter':
+			break;
+
+		case 'facebook':
+
+			require_once( 'inc/facebook-widget.php' );
+
+			$widget = new \Facebook_Widget();
+			echo $widget->login_redirect();
+
+			break;
+
+		case 'google':
+			break;
+
+		case 'instagram':
+
+			require_once( 'inc/instagram-widget.php' );
+
+			$widget = new \Instagram_Widget();
+			echo $widget->login_redirect();
+			break;
+		
+		default:
+			break;
+	}
 }
 
 

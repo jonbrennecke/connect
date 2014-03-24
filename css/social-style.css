@@ -1330,9 +1330,12 @@ add your own partials
   content: "\f196"; }
 
 [class*="fa-"]:before {
-  font-family: 'FontAwesome', sans-serif;
+  font-family: "FontAwesome", sans-serif;
   -webkit-font-smoothing: subpixel-antialiased; }
 
+@font-face {
+  font-family: "Leckerli";
+  src: url("./fonts/Leckerli/Leckerli.woff"); }
 div.social-wrap {
   position: relative;
   width: 90%;
@@ -1441,15 +1444,23 @@ div.magnum-opus {
 div.hullabaloo {
   position: relative;
   width: 90%;
-  height: 11em;
   margin: 0 auto 1em auto;
   background: #4a66a0;
-  font-family: "BebasNeue";
-  font-weight: lighter;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 20pt;
-  text-transform: uppercase;
+  background: -webkit-radial-gradient(center center, circle, #4a66a0, #3a507d);
+  border: 1px solid #32456c;
+  border-top-color: #5472b0;
+  border-bottom-color: #32456c;
+  border-left-color: #5472b0;
+  font-family: "Open Sans", sans-serif;
+  color: #32456c;
+  text-shadow: 0px 0px 5px #778ec0;
   box-sizing: border-box;
-  padding: 1em; }
+  padding: 2em; }
   div.hullabaloo h1, div.hullabaloo h2, div.hullabaloo h3 {
-    text-align: center; }
+    text-align: center;
+    font-weight: lighter;
+    margin: 0; }
+  div.hullabaloo h2 {
+    font-size: 16pt; }
+  div.hullabaloo h3 {
+    font-size: 12pt; }

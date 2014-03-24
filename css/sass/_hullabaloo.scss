@@ -1,18 +1,26 @@
 div.hullabaloo {
 	position: relative;
 	width: 90%;
-	height: 11em;
 	margin: 0 auto 1em auto;
 	background: $facebook;
-	font-family: "BebasNeue";
-	font-weight: lighter;
-	color: rgba(255,255,255,0.7);
-	font-size: 20pt;
-	text-transform: uppercase;
+	background: -webkit-radial-gradient(center center, circle, $facebook, darken($facebook,10%));
+	border: 1px solid darken($facebook, 15%);
+	border-top-color: lighten($facebook, 5%);
+	border-bottom-color: darken($facebook, 15%);
+	border-left-color: lighten($facebook, 5%);
+	font-family: "Open Sans", sans-serif;
+	color: darken($facebook,15%);
+	text-shadow: 0px 0px 5px lighten($facebook,15%);
 	box-sizing: border-box;
-	padding: 1em;
+	padding: 2em;
 
 	h1, h2, h3 {
 		text-align: center;
+		font-weight: lighter;
+		margin: 0;
 	}
+
+	h2 { font-size: 16pt; }
+
+	h3 { font-size: 12pt; }
 }

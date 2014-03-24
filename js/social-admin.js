@@ -14,22 +14,22 @@
 var social = social || { META : 'social namespace' };
 
 jQuery(document).ready( function () {
-	
-	// wrap everything in an anonymous function and call immediately
-	// this allows us to safely use variable '$' for jQuery in 'noConflict' mode
 	( function ( $ ) {
 
-		// default profile
-		var profile = new social.Profile();
+		"use strict";
 
-		var form = $('form.social'),
-			h3 = form.find('div.section.titles h3 span'),
+		var profile = new social.Profile(),
+			form = $('form.social'),
+			icons = form.find('div.section.titles h3 span'),
 			activeSection;
 
-		// onclick actions for Twitter/Facebook/Google+
-		h3.click( function ( e ) {
+		/**
+		 * onclick actions for Twitter/Facebook etc 
+		 *
+		 */
+		icons.click( function ( e ) {
 
-			target = e.target.className.split('fa-')[1];
+			var target = e.target.className.split('fa-')[1];
 
 			// get the html for the matching settings section
 			$.ajax({
@@ -55,9 +55,14 @@ jQuery(document).ready( function () {
 						.append( html )
 
 					var dots = $("#api-tool-tip").find("ul.nav-dots li"),
-						tips = $("#api-tool-tip").find("div.tool-tip_container div.tool-tip");
-					
-					function swap( index ){
+						tips = $("#api-tool-tip").find("div.tool-tip_container div.tool-tip"),
+						swap;
+
+					/**
+					 * tooltip swap animation
+					 *
+					 */
+					( swap = function ( index ){
 
 						tips.filter(".c").addClass("l",500,"easeInOutQuad").removeClass("c");
 						
@@ -78,15 +83,16 @@ jQuery(document).ready( function () {
 									$(this).delay( i * 100 ).removeClass('r').addClass('c',1000,"easeInOutQuad");
 								});
 						}
-					}
-
-					swap(0);
+					})(0);
 
 					dots.click( function ( e ) {
 						swap( dots.index(this) );
 					});
 
-					// 
+					/**
+					 * focus actions for API key inputs
+					 * 
+					 */
 					form.find('div.tool-tip table input')
 						.focus( function () {
 							$(this).parent().parent().find('th').addClass('th-focus',250);
@@ -94,9 +100,47 @@ jQuery(document).ready( function () {
 						.blur( function () {
 							$(this).parent().parent().find('th').removeClass('th-focus',250);
 						});
+
+
+					/**
+					 * click action for the SAVE button
+					 *
+					 */
+					$('#save').click( function ( e ) {
+
+						$.ajax({
+							type : 'post',
+							url : ajaxurl,
+							data : { 
+								action : 'save_settings_fields', 
+								data : { 'section' : target, 'form' : form.serialize() } 
+							},
+							success : function ( url ) {
+								if ( url ) {
+
+									// load the url in an iframe
+
+									var iframe = $('<iframe id="confirm-frame" frameborder="0">');
+									$( document.body ).append( iframe );
+									// iframe
+
+									// // open the login redirect url in a new tab or popup
+									// var tab = window.open(url,'_blank');
+									// tab.focus();
+
+									// console.log( tab )
+									// console.log( tab.document )
+									// console.log( tab.document.URL )
+									// console.log( window.document, window.document.URL )
+
+								}
+							}
+						});
+
+					});
 				}
 			});
-		}); // end onclick actions
+		}); // end account icon onclick click actions
 
 	})( jQuery );
 });
