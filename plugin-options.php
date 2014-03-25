@@ -110,7 +110,7 @@ function register_options() {
 			'instagram-id' => 'Client ID',
 			'instagram-secret' => 'Client Secret'
 		),
-		'google' => array(
+		'google-plus' => array(
 			'google-app-id' => 'Client ID',
 			'google-app-secret' => 'Client Secret'
 		)
@@ -144,7 +144,8 @@ function get_settings_fields() {
 	
 	if( isset( $_POST['sectionName'] ) && !empty( $_POST['sectionName'] ) && validate_section( $_POST['sectionName'] ) ) {
 
-		$tooltips = array( array(
+		$tooltips = array( 
+			"twitter" => array(
 				0 => "To connect Wordpress with Twitter, <em>API keys</em> are used to authenticate requests for your tweets. API keys are basically like passwords that are safer to transfer over the web.",
 				1 => "To begin, you will need to register your Wordpress website with Twitter. Open <a target='_blank' href='https://apps.twitter.com/'>this link</a> to do that, then click on 'Create New App'.",
 				2 => "You're almost done, just copy and paste the keys into the fields below and click <em>'Save'</em>."
@@ -154,12 +155,16 @@ function get_settings_fields() {
 				1 => "To begin, you will need to register your Wordpress website with Facebook. Open <a target='_blank' href='https://apps.twitter.com/'>this link</a> to do that, then click on 'Create New App'.",
 				2 => "You're almost done, just copy and paste the keys into the fields below and click <em>'Save'</em>."
 			),
-			"google" => array(
+			"google-plus" => array(
+				0 => "To connect Wordpress with Facebook, <em>API keys</em> are used to authenticate requests for your tweets. API keys are basically like passwords that are safer to transfer over the web.",
+				1 => "To begin, you will need to register your Wordpress website with Facebook. Open <a target='_blank' href='https://apps.twitter.com/'>this link</a> to do that, then click on 'Create New App'.",
+				2 => "You're almost done, just copy and paste the keys into the fields below and click <em>'Save'</em>."
 			),
 			"instagram" => array(
 				0 => "To connect Wordpress with Instagram, <em>API keys</em> are used to authenticate requests for your tweets. API keys are basically like passwords that are safer to transfer over the web.",
 				1 => "To begin, you will need to register your Wordpress website with Instagram. Open <a target='_blank' href='http://instagram.com/developer/'>this link</a> to do that, then click on 'Register Your Application'.",
-				2 => "You're almost done, just copy and paste the keys into the fields below and click <em>'Save'</em>."
+				2 => "When Instagram prompts you to enter a \"OAuth Redirect URI\", paste in this link <em>" . plugins_url( '/social/inc/redirect.php', dirname(__FILE__) ) . "</em>",
+				3 => "You're almost done, just copy and paste the keys into the fields below and click <em>'Save'</em>."
 			)
 		);
 
@@ -172,7 +177,7 @@ function get_settings_fields() {
 					<?php 
 
 						//  echo the tool tip text (say that 10 times fast!)
-						foreach ($tooltips[ $_POST['sectionName'] ] as $key => $tip) {
+						foreach ( $tooltips[ $_POST['sectionName'] ] as $key => $tip) {
 							echo "<div class='tool-tip r'><p>{$tip}</p><span class='prev'></span><span class='next'></span>";
 							if ( $key + 1 == count($tooltips[ $_POST['sectionName'] ]) ) {
 								echo "<table class='form-table'>";
@@ -203,7 +208,7 @@ function validate_section( $section ) {
 		'twitter', 
 		'facebook', 
 		'instagram', 
-		'google' 
+		'google-plus' 
 	));
 }
 
@@ -222,12 +227,15 @@ function get_profile() {
 				break;
 
 			case 'facebook':
+				// TODO
 				break;
 
-			case 'google':
+			case 'google-plus':
+				// TODO
 				break;
 
 			case 'instagram':
+				// TODO
 				break;
 			
 			default:
@@ -310,7 +318,7 @@ function login_redirect( $section ) {
 
 			break;
 
-		case 'google':
+		case 'google-plus':
 			break;
 
 		case 'instagram':

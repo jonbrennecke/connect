@@ -149,8 +149,8 @@ class Twitter_API {
 		);
 
 		// build url
-		$url = 'https://api.twitter.com/1.1/users/show.json';
-		$url .= '?' . http_build_query( array( 'screen_name' => $screen_name, 'include_entities' => true ) );
+		$url = 'https://api.twitter.com/1.1/users/show.json?';
+		$url .= http_build_query( array( 'screen_name' => $screen_name, 'include_entities' => true ) );
 
 		// post request to Twitter
 		$response = wp_remote_post( $url, $get_args );

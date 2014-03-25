@@ -12,13 +12,12 @@
  */
 
 @import "./FontAwesome/font-awesome";
+@import "functions";
 @import "admin_mixins";
 @import "fonts";
-@import "colors";
+@import "admin-vars";
+@import "confirm-frame";
 
-$gray: #d8d5d0;
-$dark: #333;
-$green: #63c56a;
 
 // adjust the margin so .wrap is adjacent to the left admin bar
 .folded #wpcontent {
@@ -138,7 +137,7 @@ $green: #63c56a;
 									width: 15%;
 
 									div {
-										@include center-absolute(120px);
+										@include center-absolute-hz(120px);
 										height: 120px;
 										background: lighten($gray,10%);
 										border: 1px solid lighten($gray,10%);
@@ -188,7 +187,7 @@ $green: #63c56a;
 								color: darken($gray,45%);
 								font-style: italic;
 								text-align: center;
-								@include center-relative(80%);
+								@include center-relative-hz(80%);
 
 								@include nav-dots;
 
@@ -226,7 +225,7 @@ $green: #63c56a;
 										}
 
 										p.save {
-											@include center-absolute(150px);
+											@include center-absolute-hz(150px);
 											height: 40px;
 											top: 100%;
 
@@ -248,7 +247,7 @@ $green: #63c56a;
 										}
 
 										table {
-											@include center-relative(45em);
+											@include center-relative-hz(45em);
 
 											tr {
 												position: relative;

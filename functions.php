@@ -89,10 +89,12 @@ function register_widgets() {
 	require_once 'inc/twitter-widget.php';
 	require_once 'inc/facebook-widget.php';
 	require_once 'inc/google-widget.php';
+	require_once 'inc/instagram-widget.php';
 
 	register_widget( 'Twitter_Widget' ); 
 	register_widget( 'Facebook_Widget' ); 
 	register_widget( 'GPlus_Widget' ); 
+	register_widget( 'Instagram_Widget' );
 }
 
 /**

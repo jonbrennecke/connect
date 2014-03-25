@@ -9,13 +9,12 @@
  */
 
 
-// include the sdk class
-// @see https://github.com/facebook/facebook-php-sdk
-// require_once 'facebook-sdk/facebook.php';
+// include the api class
+require_once 'google-api.php';
 
 class GPlus_Widget extends WP_Widget {
 
-	var $gplus;
+	var $api;
 
 	/**
 	 * Register widget with WordPress.
@@ -26,12 +25,11 @@ class GPlus_Widget extends WP_Widget {
 		$widget_ops = array('description' => __( "Google + Widget" ) );
 		parent::__construct('gplus', __('Google + Widget'), $widget_ops);
 
-		// // establish an api connection to facebook with user provided credentials from the WP database 
-		// $this->facebook = new Facebook( array(
-		// 	'appId'  => get_option('facebook-app-id'),
-		// 	'secret' => get_option('facebook-app-secret'),
-		// 	'cookie' => true
-		// ));
+		// establish an api connection to google plus with user provided credentials from the WP database 
+		$this->api = new GPlus_API( array(
+			'client-id'  => get_option('google-app-id'),
+			'client-secret' => get_option('google-app-secret'),
+		));
 
 	}
 
@@ -43,7 +41,6 @@ class GPlus_Widget extends WP_Widget {
 	 */
 
 	public function widget( $args, $instance ) {
-
 
 
 
