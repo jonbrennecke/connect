@@ -1,14 +1,19 @@
 <?php
 
 /**
+ * OAuth API Base Class
  *
- * OAuth Base Class
+ * @package WordPress
+ * @subpackage Social
+ * @since Social 1.0
  *
- * """
+ *
  * OAuth (or 'Open Authentication') 2.0 is a standard protocol for applications (such as this one!)
  * to access information on behalf of a user. Essentially, it allows users to share specific data 
  * from their profiles while keeping their usernames, passwords, and other sensitive information private.
- * """
+ *
+ * 
+ * @see http://en.wikipedia.org/wiki/OAuth
  *
  */
 
@@ -22,7 +27,8 @@ class OAuth {
 		'client-id' => '',
 		'client-secret' => '',
 		'csrf' => '',
-		'code' => ''
+		'code' => '',
+		'access-token'
 	);
 
 

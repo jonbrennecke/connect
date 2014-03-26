@@ -17,11 +17,14 @@
 
 namespace social;
 
-require_once 'ajax.php';
+// there's a bunch more functions in the ajax-functions.php file
+// we'll definitely by needing them.
+require_once 'ajax-functions.php';
 
 
 /**
- * create the content of the admin-side plugin options page
+ * Create the content of the admin-side plugin options page
+ *
  */
 function create_plugin_page() {
 	?>
@@ -68,7 +71,8 @@ function do_settings_sections_title( $page ) {
 }
 
 /**
- * register the settings sections
+ * register the settings sections and all the settings fields
+ *
  */
 function register_options() {
 

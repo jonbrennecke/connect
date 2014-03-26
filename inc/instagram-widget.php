@@ -46,7 +46,17 @@ class Instagram_Widget extends WP_Widget {
 
 	public function widget( $args, $instance ) {
 
-		$this->api->feed();		
+		$data = $this->api->feed();	
+
+		echo '<div class="instagram">';
+		foreach ($data as $i => $obj) {
+			echo "<img src=\"{$obj->images->low_resolution->url}\" >";
+			echo "<h1>{$obj->user->full_name}</h1>";
+			echo "<h2>{$obj->likes->count} Likes</h2>";
+			echo "<h2>{$obj->comments->count} Comments</h2>";
+			echo "<img src=\"{$obj->user->profile_picture}\" >";
+		}
+	 	echo '</div>';
 
 		// echo get_option( 'instagram-access-token' );
 
@@ -54,7 +64,7 @@ class Instagram_Widget extends WP_Widget {
 
 	public function login_redirect( ) {
 	
-		return $this->api->login_url();
+		return $this->api->login_redirect();
 
 	}
 

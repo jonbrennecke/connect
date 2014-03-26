@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Plugin Name: Stats
+ * Plugin Name: Social
  * Plugin URI: http://jonbrennecke.github.io/
  * Version: v1.00
  * Author: <a href="http://jonbrennecke.github.io/">Jon Brennecke</a>
- * Description: Infographics
+ * Description: Social
  *
  * @package WordPress
  * @subpackage Social
@@ -13,10 +13,18 @@
  *
  */
 
+
+/**
+ * to distinguish from the normal theme mumbo-jumbo, and whatever 
+ * nonsense any other plugins might have included, let's put everything 
+ * in our theme into a very special namespace. 
+ *
+ */
 namespace social;
 
 /**
- * add actions to their appropriate WP hooks
+ * Add actions to their appropriate WP hooks. Careful, there's quite a lot of these.
+ *
  */
 function add_actions() {
 
@@ -58,6 +66,7 @@ function add_actions() {
 
 /**
  * enqueue scripts and stylesheets for the back-end
+ *
  */
 function admin_enqueue_scripts() {
 
@@ -72,6 +81,7 @@ function admin_enqueue_scripts() {
 
 /**
  * enqueue scripts and stylesheets for the front-end
+ *
  */
 function enqueue_scripts() {
 
@@ -81,7 +91,7 @@ function enqueue_scripts() {
 }
 
 /**
- *
+ * Register all the widgetsssss
  *
  */
 function register_widgets() { 
@@ -98,7 +108,8 @@ function register_widgets() {
 }
 
 /**
- *  register the admin-side plugin page
+ *  Register the admin-side plugin page. Yes, we do need one of those!
+ *
  */
 function add_plugin_page() {
 	$plugin_page = add_plugins_page( 
@@ -113,7 +124,7 @@ function add_plugin_page() {
 }
 
 /**
- * to load images and other resources, javascript needs to know where everything's located. 
+ * In order to load images and other resources, javascript needs to know where everything's located. 
  * So we pass JS a PATH variable in the admin <head>
  *
  */

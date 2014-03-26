@@ -1,1 +1,0 @@
-Most of twitter's functions require an application to be authenticated (i.e., 'logged-in'). Fortunately, Twitter makes this process very easy. Just go to https://apps.twitter.com/ and click on 'Create New App'. Twitter will guide you through a simple registration process, where you will recieve several "API Keys". Enter them in the fields to your left. 

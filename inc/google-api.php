@@ -1,6 +1,20 @@
 <?php
 
+/**
+ * Google Plus API Class
+ *
+ * @package WordPress
+ * @subpackage Social
+ * @since Social 1.0
+ *
+ *
+ * @see https://developers.google.com/accounts/docs/
+ * @see https://console.developers.google.com/
+ */
 
+
+
+// require the base class
 require_once 'oauth.php';
 
 class GPlus_API extends OAuth {

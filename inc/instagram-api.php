@@ -8,33 +8,21 @@
  * @since Social 1.0
  */
 
-class Instagram_API {
+// require the base class
+require_once 'oauth.php';
 
-	// default credentials
-	var $cred = array(
-		'client-id' => '',
-		'client-secret' => '',
-		'csrf' => '',
-		'access-token' => ''
-	);
+class Instagram_API extends OAuth {
 
 
 	/**
-	 * Constructor
-	 *
-	 * @param
-	 */
-
-	public function __construct( $cred = array( ) ) {
-		
-		// merge supplied credentials with default arguments
-		if ( is_array($cred) && !empty($cred) ) {
-			$this->cred = array_merge($this->cred, $cred);
-		}
-
+	* @see 'oauth.php'
+	*
+	*/
+	public function __construct( $cred = array() ) {
+		parent::__construct( $cred );
 	}
 
-	public function login_url( ) {
+	public function login_redirect( ) {
 
 		// build url
 		$url = 'https://instagram.com/oauth/authorize/?';
@@ -69,17 +57,8 @@ class Instagram_API {
 				'code' => $this->cred['csrf']
 			)
 		);
-		
-		// send an HTTPS POST request to Twitter
-		$response = wp_remote_post( 'https://api.instagram.com/oauth/access_token', $post_args );
 
-		// is the post request successful?
-		if( is_wp_error( $response ) ) {
-			die();
-		}
-			
-		// decode the JSON string in 'body' into a php 'stdClass' object
-		$body = json_decode( $response['body'] );
+		$body = $this->__get_access_token( 'https://api.instagram.com/oauth/access_token', $post_args );
 
 		if ( isset( $body->access_token ) ) {
 			return $body->access_token;
@@ -123,7 +102,7 @@ class Instagram_API {
 
 		$body = json_decode( $response['body'] );
 	
-		var_dump( $body );
+		return $body->data;
 
 	}
 }
