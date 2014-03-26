@@ -42,8 +42,12 @@ class GPlus_Widget extends WP_Widget {
 
 	public function widget( $args, $instance ) {
 
+		$this->api->get_access_token();
 
+	}
 
+	public function login_redirect() {
+		return $this->api->login_redirect();
 	}
 
 }

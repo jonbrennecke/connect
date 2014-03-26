@@ -9,7 +9,8 @@ class GPlus_API {
 	// default credentials
 	var $cred = array(
 		'client-id' => '',
-		'client-secret' => ''
+		'client-secret' => '',
+		'csrf' => ''
 	);
 
 
@@ -26,9 +27,28 @@ class GPlus_API {
 			$this->cred = array_merge($this->cred, $cred);
 		}
 
+	}
+
+	public function login_redirect() {
+
+		$url = "https://accounts.google.com/o/oauth2/auth";
+		$url .= "?" . http_build_query(array(
+			"client_id" => $this->cred["client-id"],
+			"scope" => "openid email", 
+			"response_type" => "code",
+			"redirect_uri" => plugins_url( '/inc/redirect.php?s=google-plus', dirname(__FILE__) ),
+			"state" => $this->cred['csrf']
+		));
+
+		return $url;
+
+	}
+
+	public function get_access_token() {
 
 
 	}
+
 
 	/**
 	 * Cross-Site Request Forgery tokens

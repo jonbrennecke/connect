@@ -7,6 +7,9 @@
  * Author: <a href="http://jonbrennecke.github.io/">Jon Brennecke</a>
  * Description: Social
  *
+ *
+ * OAuth 2.0 allows users to share specific data with you (for example, contact lists) while keeping their usernames, passwords, and other information private.
+ *
  * @package WordPress
  * @subpackage Social
  * @since Social 1.0
@@ -158,7 +161,8 @@ function get_settings_fields() {
 			"google-plus" => array(
 				0 => "To connect Wordpress with Facebook, <em>API keys</em> are used to authenticate requests for your tweets. API keys are basically like passwords that are safer to transfer over the web.",
 				1 => "To begin, you will need to register your Wordpress website with Facebook. Open <a target='_blank' href='https://apps.twitter.com/'>this link</a> to do that, then click on 'Create New App'.",
-				2 => "You're almost done, just copy and paste the keys into the fields below and click <em>'Save'</em>."
+				2 => "When Instagram prompts you to enter a \"OAuth Redirect URI\", paste in this link <em>" . plugins_url( '/social/inc/redirect.php?s=google-plus', dirname(__FILE__) ) . "</em>",
+				3 => "You're almost done, just copy and paste the keys into the fields below and click <em>'Save'</em>."
 			),
 			"instagram" => array(
 				0 => "To connect Wordpress with Instagram, <em>API keys</em> are used to authenticate requests for your tweets. API keys are basically like passwords that are safer to transfer over the web.",
@@ -319,6 +323,24 @@ function login_redirect( $section ) {
 			break;
 
 		case 'google-plus':
+
+			require_once( 'inc/google-widget.php' );
+
+			// *************************
+			// Google's API requires a special value, called a 'state' token to be created on the server 
+			// and passed to the API endpoint for retrieving a login URL.  When google redirects from the
+			// login page, the state token is passed back to our redirect URI where it is compared against 
+			// the option stored in the WP database
+			// ********************************
+
+			// create a state token (or 'CSRF' code)
+			$state = md5( rand() );
+
+			update_option( 'gooogle-csrf-code', $state );
+
+			$widget = new \GPlus_Widget();
+			echo $widget->login_redirect();
+			
 			break;
 
 		case 'instagram':
