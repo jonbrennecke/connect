@@ -1,0 +1,26 @@
+@mixin nav-dots {
+	ul.nav-dots {
+		list-style-type: none;
+		height: 1em;
+		@include center-relative-hz(10em);
+
+		li {
+			cursor: pointer;
+			display: inline-block;
+			border: 1px solid $dark;
+			border-radius: 50%;	
+			height: 0.5em;
+			width: 0.5em;
+			margin: 0.5em;
+			transition: background 0.2s;
+		
+			&:hover {
+				background: darken($gray,30%);
+			}
+
+			&.selected {
+				background: darken($gray,50%);
+			}
+		}
+	}
+}

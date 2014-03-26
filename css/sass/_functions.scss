@@ -1,0 +1,29 @@
+@mixin boxSizing( $sizing ) {
+	-webkit-box-sizing: $sizing;
+	-moz-box-sizing: $sizing;
+	box-sizing: $sizing;
+}
+
+@mixin center-relative-hz( $width ) {
+	position: relative;
+	width: $width;
+	margin: 0 auto;
+}
+
+@mixin center-absolute-hz( $width ) {
+	position: absolute;
+	width: $width;
+	left: 50%;
+	margin-left: -($width / 2);
+}
+
+@mixin center-relative-vert( $height ) {
+
+}
+
+@mixin center-absolute-vert( $height ) {
+	position: absolute;
+	height: $height;
+	top: 50%;
+	margin-top: -($height / 2);
+}
