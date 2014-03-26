@@ -8,7 +8,6 @@
  * Description: Social
  *
  *
- * OAuth 2.0 allows users to share specific data with you (for example, contact lists) while keeping their usernames, passwords, and other information private.
  *
  * @package WordPress
  * @subpackage Social

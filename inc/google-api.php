@@ -1,33 +1,16 @@
 <?php
 
-// set_include_path("../src/");
-// require_once 'google-api-php-client/src/Google/Client.php';
-// require_once 'google-api-php-client/src/Google/Service/Urlshortener.php';
 
-class GPlus_API {
+require_once 'oauth.php';
 
-	// default credentials
-	var $cred = array(
-		'client-id' => '',
-		'client-secret' => '',
-		'csrf' => '',
-		'code' => ''
-	);
-
+class GPlus_API extends OAuth {
 
 	/**
-	 * Constructor
-	 *
-	 * @param
-	 */
-
-	public function __construct( $cred = array( ) ) {
-		
-		// merge supplied credentials with default arguments
-		if ( is_array($cred) && !empty($cred) ) {
-			$this->cred = array_merge($this->cred, $cred);
-		}
-
+	* @see 'oauth.php'
+	*
+	*/
+	public function __construct( $cred = array() ) {
+		parent::__construct( $cred );
 	}
 
 	public function login_redirect() {
@@ -64,38 +47,8 @@ class GPlus_API {
 				'grant_type' => 'authorization_code', 
 			)
 		);
-		
-		var_dump($post_args);
 
-		// send an HTTPS POST request to Google
-		$response = wp_remote_post( 'https://accounts.google.com/o/oauth2/token', $post_args );
-
-		return $response;
-	}
-
-
-	/**
-	 * Cross-Site Request Forgery tokens
-	 *
-	 * @see https://developers.google.com/+/web/signin/server-side-flow
-	 */
-
-	private function csrf_token() {
-
-		// // Create a state token to prevent request forgery.
-		// // Store it in the session for later validation.
-		// $state = md5( rand() );
-		// $app['session']->set('state', $state);
-
-		// // Set the client ID, token state, and application name in the HTML while
-		// // serving it.
-		// return $app['twig']->render('index.html', array(
-		// 	'CLIENT_ID' => CLIENT_ID,
-		// 	'STATE' => $state,
-		// 	'APPLICATION_NAME' => APPLICATION_NAME
-		// ));
-
-
+		var_dump( $this->__get_access_token( 'https://accounts.google.com/o/oauth2/token', $post_args ) );
 	}
 
 }
