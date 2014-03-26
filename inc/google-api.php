@@ -48,7 +48,7 @@ class GPlus_API extends OAuth {
 			)
 		);
 
-		var_dump( $this->__get_access_token( 'https://accounts.google.com/o/oauth2/token', $post_args ) );
+		return $this->__get_access_token( 'https://accounts.google.com/o/oauth2/token', $post_args );
 	}
 
 }

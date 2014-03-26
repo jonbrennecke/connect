@@ -47,6 +47,10 @@ class GPlus_Widget extends WP_Widget {
 
 	}
 
+	/**
+	* Call the api function
+	*
+	*/ 
 	public function login_redirect() {
 		return $this->api->login_redirect();
 	}

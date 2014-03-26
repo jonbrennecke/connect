@@ -71,18 +71,24 @@ if ( isset( $_GET['s'] ) && isset( $_GET['code'] ) && !empty( $_GET['code'] ) ) 
 
 			$token = $api->get_access_token();
 
-			var_dump( $token );
+			if ( isset( $token->access_token ) && isset( $token->token_type ) && $token->token_type == "Bearer" ) {
+				update_option( 'google-access-token', $token->access_token );
 
-			// if ( $t)
-
-
+				echo 'here';
+			}
 
 		}
 
-
-		
-
 	}
+
+	/**
+	 *  ~~~~~~~~~~ FACEBOOK ~~~~~~~~~~
+	 * 
+	 * Facebook also uses OAuth 2.0, however, for Facebook we're using it's pre-packaged sdk files
+	 *
+	 * @see inc/facebook-sdk/
+	 *
+	 */
 }
 
 ?>
