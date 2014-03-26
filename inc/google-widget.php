@@ -29,6 +29,7 @@ class GPlus_Widget extends WP_Widget {
 		$this->api = new GPlus_API( array(
 			'client-id'  => get_option('google-app-id'),
 			'client-secret' => get_option('google-app-secret'),
+			'csrf' => get_option('gooogle-csrf-code')
 		));
 
 	}

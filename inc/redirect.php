@@ -54,20 +54,33 @@ if ( isset( $_GET['s'] ) && isset( $_GET['code'] ) && !empty( $_GET['code'] ) ) 
 		// the api class will later exchange this for an access token
 		update_option( 'google-code', $_GET['code'] );
 
-		// confirm state token
+		// confirm anti-forgery 'state' token ('CSRF' token) w/ the value stored in the WP database
+		$state = get_option( 'gooogle-csrf-code' );
 
-		// save the anti-forgery 'state' token ('CSRF' token)
-		update_option( 'gooogle-csrf-code', $_GET['state'] );
+		if ( $state == $_GET['state'] ) {
 
-		// require_once "google-api.php";
+			// if the CSRF tokens match, the next step is to get and save an access token
 
-		// the next step is to get and save an access token
+			require_once "google-api.php";
 
-		// $api = new GPlus_API( array(
-		// 	'client-id'  => get_option('google-app-id'),
-		// 	'client-secret' => get_option('google-app-secret'),
-		// 	'csrf' => $_GET['state']
-		// ));
+			$api = new GPlus_API( array(
+				'client-id'  => get_option('google-app-id'),
+				'client-secret' => get_option('google-app-secret'),
+				'code' => $_GET['code']
+			));
+
+			$token = $api->get_access_token();
+
+			var_dump( $token );
+
+			// if ( $t)
+
+
+
+		}
+
+
+		
 
 	}
 }

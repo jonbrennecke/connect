@@ -114,7 +114,7 @@ function register_options() {
 			'instagram-secret' => 'Client Secret'
 		),
 		'google-plus' => array(
-			'google-app-id' => 'Client ID',
+			'google-app-id' => 'Client ID Email',
 			'google-app-secret' => 'Client Secret'
 		)
 	);
