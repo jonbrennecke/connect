@@ -1,0 +1,185 @@
+div.instagram {
+	@include center-relative-hz( 80% );
+	height: 10em;
+	overflow: hidden;
+
+	img.main-img {
+		width: 60%;
+	}
+
+	div.img-container {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		@include boxSizing(border-box);
+	}
+
+	div.info {
+		position: absolute;
+		background: $instagram;
+		width: 40%;
+		right: 0;
+		height: 100%;
+		font-family: "Open Sans", sans-serif;
+		@include boxSizing(border-box);
+
+		box-shadow: 0px 0px 150px 0px rgba(#000,1);
+		border-left: 1px solid lighten($instagram,10%);
+
+		div.info_text {
+			position: relative;
+			width: 50%;
+			float: left;
+			padding: 1em;
+			@include boxSizing(border-box);
+		}
+
+		h1,h2,h3 {
+			font-weight: lighter;
+			color: #ccc;
+			margin: 0;
+		}
+
+		h1 {
+			font-size: 14pt;
+		}
+		h2 {
+			font-size: 12pt;
+		}
+
+		div.profile-pic {
+			height: 100%;
+			float: left;
+			position: relative;
+			width: 50%;
+			display: block;
+			@include boxSizing(border-box);
+
+			img {
+				@include center-absolute-hz(50%);
+				top: 12.5%;
+				border-radius: 50%;
+			}
+		}
+	}
+}
+
+div.instagram2 {
+	$width: 20em;
+	$height: 30em;
+	$radius: 4px;
+
+	@include center-relative-hz( $width );
+	height: $height;
+	background: #222;
+	border-radius: $radius;
+
+	&:before {
+		content: '';
+		position: absolute;
+		z-index: 1000;
+		width: 100%;
+		height: 100%;
+		border-radius: $radius;
+		box-shadow: 0px 0px 0px 1px #222 inset, 
+					0px 0px 4px rgba(#fff,1) inset;
+	}
+
+	.containers {
+		position: relative;
+		width: $width;
+		@include boxSizing(border-box);
+	}
+
+	div.img-container {
+		@extend .containers;
+		height: $width;
+
+		img.main-img { 
+			width: 100%; 
+			border-radius: $radius;
+		}
+
+		&:before {
+			content: '';
+			position: absolute;
+			width: calc(100% - 2px);
+			left: 1px;
+			height: 100%;
+			box-shadow: 0px -5px 0px -4px #222 inset,
+						0px -5px 4px -5px rgba(#fff,1) inset;
+		}
+
+	}
+
+	div.info-container {
+		@extend .containers;
+		height: ($height - $width);
+		background: $instagram;
+		font-family: Segoe-Light; // TODO fix this
+		color: lighten($instagram,40%);
+		border-bottom-right-radius: $radius;
+		border-bottom-left-radius: $radius;
+		border-top: 1px solid lighten($instagram,10%);
+
+		div.info_user-stats {
+			width: 100%;
+			margin-top: -2.5em;
+			background: rgba(#fff,0.7);
+			background: -webkit-linear-gradient(top,rgba(#fff,0.7),rgba(#fff,1));
+			height: 5em;
+			box-shadow: 0px 0px 100px 0px rgba(#000,0.5),
+						0px -1px 1px 0px rgba(#000,1) inset,
+						0px 1px 1px 0px rgba(#fff,1) inset;
+
+			h1 {
+				position: absolute;
+				margin: 0;
+				text-align: center;
+				font-weight: bolder;
+				color: rgba(#000,0.5);
+				font-size: 26pt;
+				text-shadow: 0px 0px 5px #fff;
+
+				&.followers { left: 0.5em; }
+
+				&.following { right: 0.5em; }
+				
+				span.label { 
+					display: block;
+					font-size: 10pt; 
+				}
+			}
+		}
+
+		div.info_text {		
+
+			@include h(1,6) {
+				margin: 0; 
+				font-weight: lighter;
+				text-align: center;
+			}
+
+			h1 {
+				margin-top: 10%;
+				font-size: 16pt; 
+			}
+
+			h2 {
+				margin-top: 1em;
+				font-size: 10pt;
+				width: 80%;
+				margin: 0 auto;
+			}
+
+			img.profile-pic {
+				@include center-absolute-hz(30%);
+				z-index: 1000000;
+				top: -35%;
+				border-radius: 50%;
+				border: 10px solid #fff;
+				box-shadow: 0px 0px 150px 0px #000;
+			}
+		}
+	}
+}
