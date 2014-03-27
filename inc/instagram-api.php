@@ -58,7 +58,7 @@ class Instagram_API extends OAuth {
 			)
 		);
 
-		$body = $this->__get_access_token( 'https://api.instagram.com/oauth/access_token', $post_args );
+		$body = $this->__http_post( 'https://api.instagram.com/oauth/access_token', $post_args );
 
 		if ( isset( $body->access_token ) ) {
 			return $body->access_token;
@@ -102,8 +102,30 @@ class Instagram_API extends OAuth {
 
 		$body = json_decode( $response['body'] );
 	
-		return $body->data;
+		return $body;
 
+	}
+
+	public function profile() {
+
+		// arguments for wp_remote_post
+		$get_args = array(
+			'method' => 'GET',
+			'httpversion' => '1.1',
+			'headers' => array( 
+				'Content-Type' => 'application/x-www-form-urlencoded;charset=UTF-8',
+				'Accept-Encoding' =>  'gzip'
+			),
+		);
+
+		// build the url
+		$url = "https://api.instagram.com/v1/users/self";
+		$url .= "?" . http_build_query( array(
+			'access_token' => $this->cred['access-token'],
+			'count' => 1,
+		));
+
+		return $this->__http_get( $url, $get_args);
 	}
 }
 

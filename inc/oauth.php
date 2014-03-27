@@ -84,18 +84,15 @@ class OAuth {
 
 	/**
 	 *
-	 * The access token is retrieved by making an HTTPS POST request to a special
-	 * API endpoint (usually something like '/oauth/token' )
-	 *
-	 * This function handles the POST and error handling.
+	 * This function handles POST requests and error handling.
 	 *
 	 * @param $url (string) - base url to which to make the HTTPS POST request
 	 * @param $post_args (array) - arguments for the call to the wordpress function wp_remote_post
 	 *
-	 * @return (string) - the access token
+	 * @return (string) - the response from the remote server
 	 * 
 	 */
-	protected function __get_access_token( $url = "", $post_args = array() ) {
+	protected function __http_post( $url = "", $post_args = array() ) {
 
 		if ( empty($post_args) ) {
 
@@ -127,6 +124,43 @@ class OAuth {
 			
 		// decode the JSON string in 'body' into a php 'stdClass' object
 		return json_decode( $response['body'] );
+	}
+
+	/**
+	 *
+	 * This function handles GET requests and error handling.
+	 *
+	 * @param $url (string) - base url to which to make the HTTPS GET request
+	 * @param $post_args (array) - arguments for the call to the wordpress function wp_remote_post
+	 *
+	 * @return (string) - the response from the remote server
+	 * 
+	 */
+	protected function __http_get( $url, $get_args ) {
+		if ( empty($get_args) ) {
+
+			// default post args
+			$get_args = array(
+				'method' => 'GET',
+				'httpversion' => '1.1',
+				'headers' => array( 
+					'Content-Type' => 'application/x-www-form-urlencoded;charset=UTF-8',
+					'Accept-Encoding' =>  'gzip'
+				),
+			);
+
+		}
+
+		// send an HTTPS GET request to Instagram
+		$response = wp_remote_get( $url, $get_args );
+
+		// is the request successful?
+		if( is_wp_error( $response ) ) {
+			die();
+		}
+
+		return json_decode( $response['body'] );
+
 	}
 }
 

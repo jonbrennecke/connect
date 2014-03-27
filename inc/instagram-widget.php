@@ -6,6 +6,7 @@
  * @package WordPress
  * @subpackage Social
  * @since Social 1.0
+ *
  */
 
 
@@ -46,19 +47,30 @@ class Instagram_Widget extends WP_Widget {
 
 	public function widget( $args, $instance ) {
 
-		$data = $this->api->feed();	
+		$feed = $this->api->feed();	
+		$data = $feed->data;
 
-		echo '<div class="instagram">';
-		foreach ($data as $i => $obj) {
-			echo "<img src=\"{$obj->images->low_resolution->url}\" >";
-			echo "<h1>{$obj->user->full_name}</h1>";
-			echo "<h2>{$obj->likes->count} Likes</h2>";
-			echo "<h2>{$obj->comments->count} Comments</h2>";
-			echo "<img src=\"{$obj->user->profile_picture}\" >";
-		}
-	 	echo '</div>';
+		$profile = $this->api->profile()->data;
 
-		// echo get_option( 'instagram-access-token' );
+		?>
+			<div class="instagram2">
+			<?php foreach ($data as $i => $obj) : ?>
+				<div class='img-container'>
+					<img class='main-img' src="<?php echo $obj->images->standard_resolution->url; ?>" />
+				</div>
+				<div class='info-container'>
+					<div class='info_user-stats'>
+						<h1 class="following"><?php echo $profile->counts->follows; ?><span class='label'>Following</span></h1>
+						<h1 class="followers"><?php echo $profile->counts->followed_by; ?><span class='label'>Followers</span></h1>
+					</div>
+					<div class='info_text'>
+					<h1><?php echo $obj->user->full_name; ?></h1>
+					<h2><?php echo $obj->caption->text; ?></h2>
+					<div class='profile-pic'><img class='profile-pic' src="<?php echo $obj->user->profile_picture; ?>" ></div>
+				</div>
+			<?php endforeach; ?>
+		 	</div>
+	 	<?php
 
 	}
 

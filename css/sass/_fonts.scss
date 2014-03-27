@@ -25,3 +25,25 @@
 	font-family: "Leckerli One";
 	src : url("./fonts/Leckerli/Leckerli.woff");
 }
+
+@font-face {
+	font-family: "Bitter";
+	src : url("./fonts/Bitter/Bitter-Regular.otf");
+}
+
+/**
+ * 
+ *
+ */
+@mixin font( $font ) {
+	@if $font == bitter {
+		font-family: "Bitter";
+	}
+	@else if $font == Leckerli {
+		font-family: "Leckerli One", cursive;
+		font-weight: normal;
+	}
+	@else {
+		font-family: $font;
+	}
+}
