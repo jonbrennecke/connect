@@ -36,6 +36,16 @@
 	src: url("./fonts/Simplifica/Simplifica.ttf");	
 }
 
+@font-face {
+	font-family: "ActualBook";
+	src: url("./fonts/Actual/Actual.otf");		
+}
+
+@font-face {
+	font-family: "Hallo Sans";
+	src: url("./fonts/Hallo Sans/Hallo sans.otf");		
+}
+
 /**
  * 
  *
@@ -50,6 +60,9 @@
 	}
 	@else if $font == Simplifica {
 		font-family: "Simplifica";
+	}
+	@else if $font == ActualBook {
+		font-family: "ActualBook";
 	}
 	@else if $font == default {
 		font-family: "Segoe UI Light", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif; 

@@ -1,19 +1,21 @@
 /* 
-
-
-add your own partials 
-
-
-*/
+ *
+ *
+ * Thanks to the elegance of SASS (Syntactically Awesome Stylesheets), this plugin is designed 
+ * to make it very easy for you too add your own styles.
+ *
+ * Write your style as a SASS partial and import it below!
+ *
+ */
 
 // general
-@import "functions";
+@import "sass/functions";
 @import "colors";
 @import "fonts";
 
 // themes
-@import "metro";
-@import "magnum-opus";
-@import "hullabaloo";
-@import "instagram";
-
+@import "themes/metro";
+@import "themes/magnum-opus";
+@import "themes/hullabaloo";
+@import "themes/instagram";
+@import "themes/italia";

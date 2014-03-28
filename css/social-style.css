@@ -1,10 +1,12 @@
 /* 
-
-
-add your own partials 
-
-
-*/
+ *
+ *
+ * Thanks to the elegance of SASS (Syntactically Awesome Stylesheets), this plugin is designed 
+ * to make it very easy for you too add your own styles.
+ *
+ * Write your style as a SASS partial and import it below!
+ *
+ */
 /**
  * Various SASS functions
  *
@@ -1377,6 +1379,12 @@ add your own partials
 @font-face {
   font-family: "Simplifica";
   src: url("./fonts/Simplifica/Simplifica.ttf"); }
+@font-face {
+  font-family: "ActualBook";
+  src: url("./fonts/Actual/Actual.otf"); }
+@font-face {
+  font-family: "Hallo Sans";
+  src: url("./fonts/Hallo Sans/Hallo sans.otf"); }
 /**
  * 
  *
@@ -1496,77 +1504,100 @@ div.magnum-opus {
 div.hullabaloo {
   position: relative;
   width: 100%;
-  background: #542537;
-  border: 1px solid #9b4465;
-  border-left-color: #77354e;
-  border-bottom-color: #311520;
+  background: #55acee;
+  background: -webkit-radial-gradient(0% 0%, circle, #83c3f3, #55acee);
+  border: 1px solid #b2d9f7;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   height: 200px; }
   div.hullabaloo div.section-name-container {
     position: relative;
-    width: 30%;
+    width: 17%;
     height: 100%;
     float: left;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box; }
     div.hullabaloo div.section-name-container h1.section-name {
-      display: block;
-      font-size: 75px;
-      color: #78c2c5;
       position: absolute;
       height: 75px;
       top: 50%;
-      margin-top: -37.5px;
-      font-family: "Leckerli One", cursive;
-      font-weight: normal;
-      line-height: 1;
-      text-align: right;
-      width: 100%; }
+      margin-top: -37.5px; }
+      div.hullabaloo div.section-name-container h1.section-name span.section-title {
+        display: none; }
       div.hullabaloo div.section-name-container h1.section-name span[class*="fa-"] {
+        margin: 1em;
+        display: block;
+        line-height: 1;
+        text-align: right;
+        width: 100%;
         left: 15%;
-        color: #ecd07d;
+        color: #2795e9;
         font-size: 75px;
         position: absolute;
         height: 75px;
         top: 50%;
         margin-top: -37.5px; }
+        div.hullabaloo div.section-name-container h1.section-name span[class*="fa-"]:before {
+          z-index: 2;
+          background: -webkit-radial-gradient(60% 60%, circle, #3ea1ec, #126db2);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          position: absolute; }
+        div.hullabaloo div.section-name-container h1.section-name span[class*="fa-"]:after {
+          position: absolute;
+          font-family: "FontAwesome", sans-serif;
+          -webkit-font-smoothing: subpixel-antialiased;
+          content: "\f099";
+          z-index: 1;
+          left: 0;
+          text-shadow: 0px 0px 5px #b2d9f7, 0px 0px 5px #b2d9f7, -10px -10px 15px rgba(178, 217, 247, 0.5), 0px 0px 25px rgba(178, 217, 247, 0.5); }
   div.hullabaloo div.profile-pic-wrap {
     display: none; }
   div.hullabaloo .container, div.hullabaloo div.tweet-text-container, div.hullabaloo div.info-list-container {
     position: relative;
-    width: 70%;
+    width: 83%;
     height: 50%;
     float: left;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    padding-left: 5em; }
+    box-sizing: border-box; }
   div.hullabaloo div.tweet-text-container h2.tweet-text {
-    font-family: "Simplifica";
-    color: #c02a48;
-    font-size: 24pt;
+    font-family: "Segoe UI Light", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    color: #e0f0fc;
+    font-size: 20pt;
     font-weight: lighter;
     margin: 0;
     position: absolute;
-    bottom: 0; }
+    padding: 1em 5em 0 0; }
     div.hullabaloo div.tweet-text-container h2.tweet-text a {
       text-decoration: none;
       font-weight: bolder;
       color: inherit; }
       div.hullabaloo div.tweet-text-container h2.tweet-text a:hover {
         text-decoration: underline; }
+    div.hullabaloo div.tweet-text-container h2.tweet-text span[class*="fa-"] {
+      margin: 0 1em;
+      color: #b2d9f7; }
+    div.hullabaloo div.tweet-text-container h2.tweet-text span.attrib {
+      font-size: 12pt; }
   div.hullabaloo div.info-list-container ul {
     list-style-type: none;
     padding: 0;
-    font-family: "Simplifica";
-    color: #ecd07d;
-    font-size: 18pt; }
+    margin: 2em 0 0 5em;
+    font-family: "Segoe UI Light", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    color: #c9e5fa;
+    font-size: 12pt; }
     div.hullabaloo div.info-list-container ul li {
       display: inline-block;
       margin-right: 1em; }
+      div.hullabaloo div.info-list-container ul li span[class*="fa-"] {
+        color: #2795e9;
+        margin-right: 0.5em;
+        font-size: 14pt; }
 
 /**
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1682,3 +1713,99 @@ div.instagram2 {
       border-radius: 50%;
       border: 10px solid #fff;
       box-shadow: 0px 0px 150px 0px #000; }
+
+div.italia {
+  position: relative;
+  width: 100%;
+  height: 20em;
+  font-family: "ActualBook";
+  color: #69b396;
+  overflow: hidden;
+  border: 7px solid #69b396; }
+  div.italia div.cover-photo-container {
+    position: absolute;
+    z-index: -3;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden; }
+    div.italia div.cover-photo-container img.cover-photo {
+      width: 100%;
+      -webkit-filter: contrast(1.5) grayscale(0.7); }
+  div.italia div.info-container {
+    width: 100%;
+    height: 100%;
+    padding: 1em; }
+    div.italia div.info-container h1 {
+      display: block;
+      width: 15em;
+      font-size: 16pt;
+      font-weight: lighter;
+      background: #111111;
+      padding: 0.25em 2.38481em;
+      text-align: right;
+      position: relative;
+      left: 0;
+      margin: 0.5em 2.6951em;
+      transition: background 0.5s, color 0.5s, left 0.5s;
+      cursor: pointer; }
+      div.italia div.info-container h1:hover {
+        background: #ecd07d;
+        color: #111111;
+        left: -1em; }
+    div.italia div.info-container h2 {
+      display: block;
+      width: 15em;
+      font-size: 16pt;
+      font-weight: lighter;
+      background: #111111;
+      padding: 0.25em 1.18636em;
+      text-align: right;
+      position: relative;
+      left: 0;
+      margin: 0.5em 5.4522em;
+      transition: background 0.5s, color 0.5s, left 0.5s;
+      cursor: pointer; }
+      div.italia div.info-container h2:hover {
+        background: #ecd07d;
+        color: #111111;
+        left: -1em; }
+    div.italia div.info-container h3 {
+      display: block;
+      width: 15em;
+      font-size: 16pt;
+      font-weight: lighter;
+      background: #111111;
+      padding: 0.25em 0.80261em;
+      text-align: right;
+      position: relative;
+      left: 0;
+      margin: 0.5em 4.21559em;
+      transition: background 0.5s, color 0.5s, left 0.5s;
+      cursor: pointer; }
+      div.italia div.info-container h3:hover {
+        background: #ecd07d;
+        color: #111111;
+        left: -1em; }
+    div.italia div.info-container h4 {
+      display: block;
+      width: 15em;
+      font-size: 16pt;
+      font-weight: lighter;
+      background: #111111;
+      padding: 0.25em 0.42814em;
+      text-align: right;
+      position: relative;
+      left: 0;
+      margin: 0.5em 3.01556em;
+      transition: background 0.5s, color 0.5s, left 0.5s;
+      cursor: pointer; }
+      div.italia div.info-container h4:hover {
+        background: #ecd07d;
+        color: #111111;
+        left: -1em; }
+    div.italia div.info-container h3.info_status-text {
+      width: 45em; }
+    div.italia div.info-container span[class*="fa-"] {
+      display: none; }

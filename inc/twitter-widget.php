@@ -51,8 +51,9 @@ class Twitter_Widget extends WP_Widget {
 			'screen_name' => $instance['screen_name']
 		));
 
+		echo $args['before_widget'];
 		echo "<div class=\"{$instance['class_name']} twitter\">";
-		echo "<div class='section-name-container'><h1 class='section-name'><span class='fa-twitter'></span>Twitter</h1></div>";
+		echo "<div class='section-name-container'><h1 class='section-name'><span class='fa-twitter'></span><span class='section-title'>Twitter</span></h1></div>";
 
 		$this->do_profile_pic( $tweets[0]->user->profile_image_url );
 
@@ -61,6 +62,7 @@ class Twitter_Widget extends WP_Widget {
 		$this->do_user_info_bar( $tweets[0]->user );
 			
 		echo '</div>';
+		echo $args['after_widget'];
 	}
 
 	/**
@@ -221,7 +223,7 @@ class Twitter_Widget extends WP_Widget {
 		// replace urls in the title with hyperlinks
 		$text = $this->sanitize_tweet( $text, $entities );
 
-		echo "<div class='tweet-text-container'><h2 class='tweet-text'>{$text}";
+		echo "<div class='tweet-text-container'><h2 class='tweet-text'><span class='fa-quote-left'></span>{$text}<span class='fa-quote-right'></span>";
 		echo "<span class='attrib'> — {$user->name}, <a href={$user->url}>@{$user->screen_name}</a></span></h2></div>";
 	}
 
@@ -235,10 +237,10 @@ class Twitter_Widget extends WP_Widget {
 		?>
 		<div class="info-list-container">
 			<ul class="info-list">
-				<li class="location"><span class="marker"></span><?php echo $user->location; ?></li>
-				<li><span class="number"><?php echo $user->friends_count; ?></span> <span class="label">Following</span></li>
-				<li><span class="number"><?php echo $user->followers_count; ?></span> <span class="label">Followers</span></li>
-				<li><span class="number"><?php echo $user->statuses_count; ?></span> <span class="label">Tweets</span></li>
+				<li class="location"><span class="marker fa-map-marker"></span><?php echo $user->location; ?></li>
+				<li><span class="marker fa-user"></span><span class="number"><?php echo $user->friends_count; ?></span><span class="label"> Following</span></li>
+				<li><span class="marker fa-heart"></span><span class="number"><?php echo $user->followers_count; ?></span><span class="label"> Followers</span></li>
+				<li><span class="marker fa-comments"></span><span class="number"><?php echo $user->statuses_count; ?></span><span class="label"> Tweets</span></li>
 			</ul>
 		</div>
 		<?php

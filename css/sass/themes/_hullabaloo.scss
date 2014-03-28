@@ -34,45 +34,58 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 div.hullabaloo {
-
-	// vars
-	$purple: #542537;
-	$yellow: #ecd07d;
-	$magenta: #c02a48;
-	$blue: #78c2c5;
-
 	position: relative;
 	width: 100%;
-	background: $purple;
-	border: 1px solid lighten($purple,20%);
-	border-left-color: lighten($purple,10%);
-	border-bottom-color: darken($purple,10%);
+	background: $twitter;
+	background: -webkit-radial-gradient(0% 0%, circle, lighten($twitter,10%), $twitter);
+	border: 1px solid lighten($twitter,20%);
 	@include boxSizing(border-box);
 	height: 200px;
 
 	div.section-name-container {
 		position: relative;
-		width: 30%;
+		width: 17%;
 		height: 100%;
 		float: left;
 		@include boxSizing(border-box);
 
 		h1.section-name {
-			display: block;
-			font-size: 75px;
-			color: $blue;
 			@include center-absolute-vert(75px);
-			@include font(Leckerli);
-			line-height: 1;
-			text-align: right;
-			width: 100%;
+
+			span.section-title { display: none; }
 
 			// font awesome icon
 			span[class*="fa-"] {
+				margin: 1em;
+				display: block;
+				line-height: 1;
+				text-align: right;
+				width: 100%;
 				left: 15%;
-				color: $yellow;
+				color: darken($twitter,10%);
 				font-size: 75px;
 				@include center-absolute-vert(75px);
+
+				&:before {
+					z-index: 2;
+					background: -webkit-radial-gradient(60% 60%, circle, darken($twitter,5%), darken($twitter,25%));
+					-webkit-background-clip: text;
+					-webkit-text-fill-color: transparent;
+					position: absolute;
+				}
+
+				&:after {
+					position: absolute;
+					font-family: "FontAwesome", sans-serif;
+					-webkit-font-smoothing: subpixel-antialiased;
+					content: "\f099";
+					z-index: 1;
+					left: 0;
+					text-shadow: 0px 0px 5px lighten($twitter,20%),
+								0px 0px 5px lighten($twitter,20%), 
+								-10px -10px 15px rgba(lighten($twitter,20%),0.5),
+								0px 0px 25px rgba(lighten($twitter,20%),0.5);; 
+				}
 			}
 		}
 	}
@@ -83,34 +96,40 @@ div.hullabaloo {
 
 	.container {
 		position: relative;
-		width: 70%;
+		width: 83%;
 		height: 50%;
 		float: left;
 		@include boxSizing(border-box); 
-		padding-left: 5em;
 	}
 
 	div.tweet-text-container {
 		@extend .container;
 
 		h2.tweet-text {
-			@include font(Simplifica);
-			color: $magenta;
-			font-size: 24pt;
+			@include font(default);
+			color: lighten($twitter,30%);
+			font-size: 20pt;
 			font-weight: lighter;
 			margin: 0;
 			position: absolute;
-			// height: 2em;
-			bottom: 0;
+			padding: 1em 5em 0 0;
 
 			a {
 				text-decoration: none;
 				font-weight: bolder;
 				color: inherit;
 
-				&:hover {
-					text-decoration: underline;
-				}
+				&:hover { text-decoration: underline; }
+			}
+
+
+			span[class*="fa-"] {
+				margin: 0 1em;
+				color: lighten($twitter,20%);
+			}
+
+			span.attrib {
+				font-size: 12pt;
 			}
 		}
 	}
@@ -121,13 +140,21 @@ div.hullabaloo {
 		ul {
 			list-style-type: none;
 			padding: 0;
-			@include font(Simplifica); 
-			color: $yellow;
-			font-size: 18pt;
+			margin: 2em 0 0 5em;
+			@include font(default);
+			color: lighten($twitter,25%);
+			font-size: 12pt;
 
 			li {
 				display: inline-block;
 				margin-right: 1em;
+
+				// font awesome icon
+				span[class*="fa-"] {
+					color: darken($twitter,10%);
+					margin-right: 0.5em;
+					font-size: 14pt;
+				}
 			}
 		}
 	}
