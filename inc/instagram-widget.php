@@ -47,10 +47,10 @@ class Instagram_Widget extends WP_Widget {
 
 	public function widget( $args, $instance ) {
 
-		$feed = $this->api->feed();	
-		$data = $feed->data;
-
+		$data = $this->api->feed()->data;	
 		$profile = $this->api->profile()->data;
+
+		echo $args['before_widget'];
 
 		?>
 			<div class="instagram2">
@@ -64,20 +64,27 @@ class Instagram_Widget extends WP_Widget {
 						<h1 class="followers"><?php echo $profile->counts->followed_by; ?><span class='label'>Followers</span></h1>
 					</div>
 					<div class='info_text'>
-					<h1><?php echo $obj->user->full_name; ?></h1>
-					<h2><?php echo $obj->caption->text; ?></h2>
-					<div class='profile-pic'><img class='profile-pic' src="<?php echo $obj->user->profile_picture; ?>" ></div>
+						<h1><?php echo $obj->user->full_name; ?></h1>
+						<h2><?php echo $obj->caption->text; ?></h2>
+						<div class='profile-pic'>
+							<img class='profile-pic' src="<?php echo $obj->user->profile_picture; ?>" />
+						</div>
+					</div>
 				</div>
 			<?php endforeach; ?>
 		 	</div>
 	 	<?php
 
+	 	echo $args['after_widget'];
+
 	}
 
-	public function login_redirect( ) {
-	
+	/**
+	 * 
+	 *
+	 */
+	public function login_redirect() {
 		return $this->api->login_redirect();
-
 	}
 
 

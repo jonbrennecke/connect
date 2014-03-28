@@ -48,6 +48,8 @@ jQuery(document).ready( function () {
 						data : { action : 'get_profile', sectionName : target  },
 						dataType : 'html',
 						success : function ( json ) {
+
+							console.log(json);
 							var profile = new social.TwitterProfile( json );
 						}
 					});
@@ -119,6 +121,7 @@ jQuery(document).ready( function () {
 								data : { 'section' : target, 'form' : form.serialize() } 
 							},
 							success : function ( url ) {
+
 								if ( url ) {
 
 									/**
@@ -126,42 +129,8 @@ jQuery(document).ready( function () {
 									 *
 									 */ 
 
-									// var container = $('<div id="confirm-frame-container"><div class="floater"></div></div>'),
-									// 	iframe = $('<iframe id="confirm-frame" frameborder="0" name="confirm-frame" ></iframe>');
-									
-									// $( document.body ).append( container );
-									// container.fadeIn('fast').append( iframe );
-
-									// // window object 
-									// var ifwin = window.frames["confirm-frame"];
-									// ifwin.location.replace( url );
-
-									// // open the login redirect url in a new tab or popup
-									// var tab = window.open(url,'_blank');
-									// tab.focus();
-
-									// console.log( tab )
-									// console.log( tab.document )
-									// console.log( tab.document.URL )
-									// console.log( window.document, window.document.URL )
-
-									console.log(url)
-
-
 							        var tab = window.open( url, "Confirm" );
-							        
-							        tab.focus();
-
-
-							        // $( tab.document.body ).ready( function () {
-
-										tab.onbeforeunload = function ( e ) {
-								        	console.log( e );
-								        }
-
-								        tab.onunload = function ( e ) {
-								        	console.log( e );
-								        }
+							 		tab.focus();
 
 								}
 							}

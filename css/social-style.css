@@ -1374,6 +1374,9 @@ add your own partials
 @font-face {
   font-family: "Bitter";
   src: url("./fonts/Bitter/Bitter-Regular.otf"); }
+@font-face {
+  font-family: "Simplifica";
+  src: url("./fonts/Simplifica/Simplifica.ttf"); }
 /**
  * 
  *
@@ -1483,101 +1486,107 @@ div.magnum-opus {
 @font-face {
   font-family: "BebasNeue";
   src: url("./fonts/Bebas/BebasNeue Light.otf"); }
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * 
+ * Bold text-only style for Twitter widget
+ *
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
 div.hullabaloo {
   position: relative;
-  width: 90%;
-  margin: 0 auto 1em auto;
-  background: #4a66a0;
-  background: -webkit-radial-gradient(center center, circle, #4a66a0, #3a507d);
-  border: 1px solid #32456c;
-  border-top-color: #5472b0;
-  border-bottom-color: #32456c;
-  border-left-color: #5472b0;
-  font-family: "Open Sans", sans-serif;
-  color: #32456c;
-  text-shadow: 0px 0px 5px #778ec0;
+  width: 100%;
+  background: #542537;
+  border: 1px solid #9b4465;
+  border-left-color: #77354e;
+  border-bottom-color: #311520;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 2em; }
-  div.hullabaloo h1, div.hullabaloo h2, div.hullabaloo h3 {
-    text-align: center;
-    font-weight: lighter;
-    margin: 0; }
-  div.hullabaloo h2 {
-    font-size: 16pt; }
-  div.hullabaloo h3 {
-    font-size: 12pt; }
-
-div.instagram {
-  position: relative;
-  width: 80%;
-  margin: 0 auto;
-  height: 10em;
-  overflow: hidden; }
-  div.instagram img.main-img {
-    width: 60%; }
-  div.instagram div.img-container {
-    position: absolute;
+  height: 200px; }
+  div.hullabaloo div.section-name-container {
+    position: relative;
+    width: 30%;
     height: 100%;
-    width: 100%;
+    float: left;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box; }
-  div.instagram div.info {
-    position: absolute;
-    background: #46749a;
-    width: 40%;
-    right: 0;
-    height: 100%;
-    font-family: "Open Sans", sans-serif;
+    div.hullabaloo div.section-name-container h1.section-name {
+      display: block;
+      font-size: 75px;
+      color: #78c2c5;
+      position: absolute;
+      height: 75px;
+      top: 50%;
+      margin-top: -37.5px;
+      font-family: "Leckerli One", cursive;
+      font-weight: normal;
+      line-height: 1;
+      text-align: right;
+      width: 100%; }
+      div.hullabaloo div.section-name-container h1.section-name span[class*="fa-"] {
+        left: 15%;
+        color: #ecd07d;
+        font-size: 75px;
+        position: absolute;
+        height: 75px;
+        top: 50%;
+        margin-top: -37.5px; }
+  div.hullabaloo div.profile-pic-wrap {
+    display: none; }
+  div.hullabaloo .container, div.hullabaloo div.tweet-text-container, div.hullabaloo div.info-list-container {
+    position: relative;
+    width: 70%;
+    height: 50%;
+    float: left;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    box-shadow: 0px 0px 150px 0px black;
-    border-left: 1px solid #5d8eb6; }
-    div.instagram div.info div.info_text {
-      position: relative;
-      width: 50%;
-      float: left;
-      padding: 1em;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box; }
-    div.instagram div.info h1, div.instagram div.info h2, div.instagram div.info h3 {
-      font-weight: lighter;
-      color: #ccc;
-      margin: 0; }
-    div.instagram div.info h1 {
-      font-size: 14pt; }
-    div.instagram div.info h2 {
-      font-size: 12pt; }
-    div.instagram div.info div.profile-pic {
-      height: 100%;
-      float: left;
-      position: relative;
-      width: 50%;
-      display: block;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box; }
-      div.instagram div.info div.profile-pic img {
-        position: absolute;
-        width: 50%;
-        left: 50%;
-        margin-left: -25%;
-        top: 12.5%;
-        border-radius: 50%; }
+    padding-left: 5em; }
+  div.hullabaloo div.tweet-text-container h2.tweet-text {
+    font-family: "Simplifica";
+    color: #c02a48;
+    font-size: 24pt;
+    font-weight: lighter;
+    margin: 0;
+    position: absolute;
+    bottom: 0; }
+    div.hullabaloo div.tweet-text-container h2.tweet-text a {
+      text-decoration: none;
+      font-weight: bolder;
+      color: inherit; }
+      div.hullabaloo div.tweet-text-container h2.tweet-text a:hover {
+        text-decoration: underline; }
+  div.hullabaloo div.info-list-container ul {
+    list-style-type: none;
+    padding: 0;
+    font-family: "Simplifica";
+    color: #ecd07d;
+    font-size: 18pt; }
+    div.hullabaloo div.info-list-container ul li {
+      display: inline-block;
+      margin-right: 1em; }
 
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * 
+ * Chromey style for instagram widget
+ *
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
 div.instagram2 {
   position: relative;
   width: 20em;
   margin: 0 auto;
   height: 30em;
   background: #222;
-  border-radius: 4px; }
+  border-radius: 4px;
+  overflow: hidden; }
   div.instagram2:before {
     content: '';
     position: absolute;
-    z-index: 1000;
+    z-index: 5;
     width: 100%;
     height: 100%;
     border-radius: 4px;
@@ -1603,7 +1612,8 @@ div.instagram2 {
   div.instagram2 div.info-container {
     height: 10em;
     background: #46749a;
-    font-family: Segoe-Light;
+    font-family: "Segoe UI Light", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Segoe UI", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
     color: #c7d7e5;
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
@@ -1667,7 +1677,7 @@ div.instagram2 {
       width: 30%;
       left: 50%;
       margin-left: -15%;
-      z-index: 1000000;
+      z-index: 6;
       top: -35%;
       border-radius: 50%;
       border: 10px solid #fff;

@@ -1,26 +1,137 @@
-div.hullabaloo {
-	position: relative;
-	width: 90%;
-	margin: 0 auto 1em auto;
-	background: $facebook;
-	background: -webkit-radial-gradient(center center, circle, $facebook, darken($facebook,10%));
-	border: 1px solid darken($facebook, 15%);
-	border-top-color: lighten($facebook, 5%);
-	border-bottom-color: darken($facebook, 15%);
-	border-left-color: lighten($facebook, 5%);
-	font-family: "Open Sans", sans-serif;
-	color: darken($facebook,15%);
-	text-shadow: 0px 0px 5px lighten($facebook,15%);
-	box-sizing: border-box;
-	padding: 2em;
+// div.hullabaloo {
+// 	position: relative;
+// 	width: 90%;
+// 	margin: 0 auto 1em auto;
+// 	background: $facebook;
+// 	background: -webkit-radial-gradient(center center, circle, $facebook, darken($facebook,10%));
+// 	border: 1px solid darken($facebook, 15%);
+// 	border-top-color: lighten($facebook, 5%);
+// 	border-bottom-color: darken($facebook, 15%);
+// 	border-left-color: lighten($facebook, 5%);
+// 	font-family: "Open Sans", sans-serif;
+// 	color: darken($facebook,15%);
+// 	text-shadow: 0px 0px 5px lighten($facebook,15%);
+// 	box-sizing: border-box;
+// 	padding: 2em;
 
-	h1, h2, h3 {
-		text-align: center;
-		font-weight: lighter;
-		margin: 0;
+// 	h1, h2, h3 {
+// 		text-align: center;
+// 		font-weight: lighter;
+// 		margin: 0;
+// 	}
+
+// 	h2 { font-size: 16pt; }
+
+// 	h3 { font-size: 12pt; }
+// }
+
+
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * 
+ * Bold text-only style for Twitter widget
+ *
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
+div.hullabaloo {
+
+	// vars
+	$purple: #542537;
+	$yellow: #ecd07d;
+	$magenta: #c02a48;
+	$blue: #78c2c5;
+
+	position: relative;
+	width: 100%;
+	background: $purple;
+	border: 1px solid lighten($purple,20%);
+	border-left-color: lighten($purple,10%);
+	border-bottom-color: darken($purple,10%);
+	@include boxSizing(border-box);
+	height: 200px;
+
+	div.section-name-container {
+		position: relative;
+		width: 30%;
+		height: 100%;
+		float: left;
+		@include boxSizing(border-box);
+
+		h1.section-name {
+			display: block;
+			font-size: 75px;
+			color: $blue;
+			@include center-absolute-vert(75px);
+			@include font(Leckerli);
+			line-height: 1;
+			text-align: right;
+			width: 100%;
+
+			// font awesome icon
+			span[class*="fa-"] {
+				left: 15%;
+				color: $yellow;
+				font-size: 75px;
+				@include center-absolute-vert(75px);
+			}
+		}
 	}
 
-	h2 { font-size: 16pt; }
+	div.profile-pic-wrap {
+		display: none;
+	}
 
-	h3 { font-size: 12pt; }
+	.container {
+		position: relative;
+		width: 70%;
+		height: 50%;
+		float: left;
+		@include boxSizing(border-box); 
+		padding-left: 5em;
+	}
+
+	div.tweet-text-container {
+		@extend .container;
+
+		h2.tweet-text {
+			@include font(Simplifica);
+			color: $magenta;
+			font-size: 24pt;
+			font-weight: lighter;
+			margin: 0;
+			position: absolute;
+			// height: 2em;
+			bottom: 0;
+
+			a {
+				text-decoration: none;
+				font-weight: bolder;
+				color: inherit;
+
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+
+	div.info-list-container {
+		@extend .container;
+
+		ul {
+			list-style-type: none;
+			padding: 0;
+			@include font(Simplifica); 
+			color: $yellow;
+			font-size: 18pt;
+
+			li {
+				display: inline-block;
+				margin-right: 1em;
+			}
+		}
+	}
+
+
 }
+

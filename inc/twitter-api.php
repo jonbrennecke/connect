@@ -12,13 +12,10 @@ class Twitter_API {
 
 	// credentials
 	var $cred = array(
-		'api-key' => 'default_api_key',
-		'api-secret' => 'default_api_secret',
-		'access-token' => 'default_access_token',
-		'access-secret' => 'default_access_secret'
+		'api-key' => '',
+		'api-secret' => '',
+		'access-token' => '',
 	);
-
-	var $bearer_token;
 
 	/**
 	 * Constructor
@@ -31,9 +28,6 @@ class Twitter_API {
 		if ( is_array($cred) && !empty($cred) ) {
 			$this->cred = array_merge($this->cred, $cred);
 		}
-
-		// retrieve a bearer token
-		$this->get_bearer_token();
 	}
 
 	/**
@@ -60,14 +54,13 @@ class Twitter_API {
 			'method' => 'GET',
 			'httpversion' => '1.0',
 			'headers' => array( 
-				'Authorization' => 'Bearer ' . $this->bearer_token,
+				'Authorization' => 'Bearer ' . $this->cred['access-token'],
 				'Accept-Encoding' => 'gzip'
 			)
 		);
 
 		// build url
 		$url = 'https://api.twitter.com/1.1/account/verify_credentials.json';
-		// $url .= '?' . http_build_query( array( 'entities' => $params['entities'], 'skip_status' => $params['status'] ) );
 
 		// post request to Twitter
 		$response = wp_remote_post( $url, $get_args );
@@ -105,7 +98,7 @@ class Twitter_API {
 			'method' => 'GET',
 			'httpversion' => '1.1',
 			'headers' => array( 
-				'Authorization' => 'Bearer ' . $this->bearer_token,
+				'Authorization' => 'Bearer ' . $this->cred['access-token'],
 				'Accept-Encoding' => 'gzip'
 			)
 		);
@@ -143,7 +136,7 @@ class Twitter_API {
 			'method' => 'GET',
 			'httpversion' => '1.1',
 			'headers' => array( 
-				'Authorization' => 'Bearer ' . $this->bearer_token,
+				'Authorization' => 'Bearer ' . $this->cred['access-token'],
 				'Accept-Encoding' => 'gzip'
 			)
 		);
@@ -169,11 +162,11 @@ class Twitter_API {
 
 	/**
 	 *
-	 * get the OAuth 2 bearer token from twitter
+	 * get the OAuth 2 access token from twitter
 	 *
 	 * @see https://dev.twitter.com/docs/auth/application-only-auth
 	 */
-	private function get_bearer_token() {
+	public function get_access_token() {
 
 		// URL encode the consumer key and the consumer secret and concatenate
 		// the encoded consumer key and the encoded consumer with a ':' between them. 
@@ -212,7 +205,7 @@ class Twitter_API {
 
 		// return the access token or die if it's empty
 		if ( isset($body->access_token) && !empty($body->access_token) ) {
-			$this->bearer_token = $body->access_token;
+			return $body->access_token;
 		}
 		else die();
 

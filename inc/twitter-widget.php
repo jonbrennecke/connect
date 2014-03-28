@@ -52,6 +52,7 @@ class Twitter_Widget extends WP_Widget {
 		));
 
 		echo "<div class=\"{$instance['class_name']} twitter\">";
+		echo "<div class='section-name-container'><h1 class='section-name'><span class='fa-twitter'></span>Twitter</h1></div>";
 
 		$this->do_profile_pic( $tweets[0]->user->profile_image_url );
 
@@ -206,7 +207,7 @@ class Twitter_Widget extends WP_Widget {
 			$image_url = preg_replace('/_normal/i', '', $image_url );
 		}
 
-		echo "<div class='profile_pic_wrap'><img class='profile_pic' src={$image_url} /></div>";
+		echo "<div class='profile-pic-wrap'><img class='profile-pic' src={$image_url} /></div>";
 
 	}
 
@@ -220,7 +221,7 @@ class Twitter_Widget extends WP_Widget {
 		// replace urls in the title with hyperlinks
 		$text = $this->sanitize_tweet( $text, $entities );
 
-		echo "<div class='tweet_text_wrap'><h2 class='tweet_text'>{$text}";
+		echo "<div class='tweet-text-container'><h2 class='tweet-text'>{$text}";
 		echo "<span class='attrib'> — {$user->name}, <a href={$user->url}>@{$user->screen_name}</a></span></h2></div>";
 	}
 
@@ -232,12 +233,14 @@ class Twitter_Widget extends WP_Widget {
 
 	private function do_user_info_bar( $user = null ) {
 		?>
-		<ul class="social-menu-bar">
-			<li class="location"><span class="marker"></span><?php echo $user->location; ?></li>
-			<li><span class="number"><?php echo $user->friends_count; ?></span> <span class="label">Following</span></li>
-			<li><span class="number"><?php echo $user->followers_count; ?></span> <span class="label">Followers</span></li>
-			<li><span class="number"><?php echo $user->statuses_count; ?></span> <span class="label">Tweets</span></li>
-		</ul>
+		<div class="info-list-container">
+			<ul class="info-list">
+				<li class="location"><span class="marker"></span><?php echo $user->location; ?></li>
+				<li><span class="number"><?php echo $user->friends_count; ?></span> <span class="label">Following</span></li>
+				<li><span class="number"><?php echo $user->followers_count; ?></span> <span class="label">Followers</span></li>
+				<li><span class="number"><?php echo $user->statuses_count; ?></span> <span class="label">Tweets</span></li>
+			</ul>
+		</div>
 		<?php
 	}
 		

@@ -61,15 +61,19 @@ class Facebook_Widget extends WP_Widget {
 
 		// sanitize $instance
 
+		echo $args['before_widget'];
+
 		echo "<div class=\"hullabaloo facebook\">";
-		echo "<h1><span class='fa-facebook'></span></h1>";
+		echo "<h1><span class='fa-facebook'></span>Facebook</h1>";
 		echo "<h2>{$statuses['data'][0]['from']['name']}</h2>";
 		echo "<h3>\"{$statuses['data'][0]['message']}\"</h3>";
 		echo '</div>';
 
+	 	echo $args['after_widget'];
+
 	}
 
-	public function login_redirect( ) {
+	public function login_redirect() {
 
 		// get user ID
 		$user = $this->facebook->getUser();
