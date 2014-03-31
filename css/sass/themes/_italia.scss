@@ -64,6 +64,8 @@
 // 	}
 // }
 
+@import "compass/css3/transform";
+
 div.italia {
 	// vars
 	$gray: #c7b299;
@@ -90,14 +92,21 @@ div.italia {
 
 		h2.info_name {
 			@include font(Leckerli);
-			font-size: 30pt;
+			// font-family: "Lucida Console", Monaco, monospace;
+			font-size: 42pt;
+			display: block;
+			@include center-relative-hz(10px);
+			
 
-			@for $i from 1 through 20 {
-				.char#{$i} {
-					@include transform(rotate(0deg));
-				}
+			span {
+				position: absolute;
+				height: 4em;
+				left: 0;
+				top: 0;
+				-webkit-transform-origin: bottom center;
+
+				@include rotate-text( (0,12), (-45,45) );
 			}
-
 		}
 
 		@include h(1,6) {
