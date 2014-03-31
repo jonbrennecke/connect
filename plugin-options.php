@@ -23,7 +23,7 @@ require_once 'ajax-functions.php';
 
 
 /**
- * Create the content of the admin-side plugin options page
+ * Create the HTML content of the admin-side plugin options page
  *
  */
 function create_plugin_page() {

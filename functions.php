@@ -87,6 +87,9 @@ function enqueue_scripts() {
 
 	// stylesheet
 	wp_enqueue_style('social-css', plugins_url( '/social/css/social-style.css', dirname(__FILE__)));
+
+	// front-end javascript (needs jQuery UI)
+	wp_enqueue_script('social-js',plugins_url('/social/js/main.js', dirname(__FILE__)), array('jquery','jquery-ui-core','jquery-effects-core') );
 	
 }
 

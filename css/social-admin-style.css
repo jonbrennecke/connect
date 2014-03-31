@@ -1333,6 +1333,41 @@
 .fa-plus-square-o:before {
   content: "\f196"; }
 
+/**
+ * Various SASS functions
+ *
+ *
+ * @author jonbrennecke / github.com/jonbrennecke
+ * @see github.com/jonbrennecke/sass
+ *
+ */
+/**
+ * box-sizing with browser prefixes
+ *
+ */
+/**
+ * horizontally center a relatively positioned element
+ *
+ */
+/**
+ * horizontally center an absolutely positioned element
+ *
+ */
+/**
+ * vertically center a relatively positioned element
+ *
+ */
+/**
+ * vertically center an absolutely positioned element
+ *
+ */
+/**
+ * assign @content to headers $a through $b
+ *
+ * @example - when used like "@include h(1,3) { font-family: "Open Sans", sans-serif; }"
+ * the mixin will assign the font to all h1, h2, and h3 elements.
+ *
+ */
 /*!
  *  Font Awesome 4.0.3 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
@@ -2663,31 +2698,22 @@
 @font-face {
   font-family: "Leckerli One";
   src: url("./fonts/Leckerli/Leckerli.woff"); }
-div#confirm-frame-container {
-  position: absolute;
-  display: none;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  top: 0;
-  z-index: 1000; }
-  div#confirm-frame-container .floater {
-    float: left;
-    height: 50%;
-    margin-bottom: -250px; }
-  div#confirm-frame-container #confirm-frame {
-    clear: both;
-    position: relative;
-    width: 80%;
-    margin: 0 auto;
-    height: 500px;
-    background: #222;
-    display: block;
-    border: 1px solid #e4e1de;
-    border-radius: 10px;
-    background: #efeeec;
-    box-shadow: 0px 0px 15px #aaa398, 0px 0px 0px 1px #aaa398; }
-
+@font-face {
+  font-family: "Bitter";
+  src: url("./fonts/Bitter/Bitter-Regular.otf"); }
+@font-face {
+  font-family: "Simplifica";
+  src: url("./fonts/Simplifica/Simplifica.ttf"); }
+@font-face {
+  font-family: "ActualBook";
+  src: url("./fonts/Actual/Actual.otf"); }
+@font-face {
+  font-family: "Hallo Sans";
+  src: url("./fonts/Hallo Sans/Hallo sans.otf"); }
+/**
+ * 
+ *
+ */
 .folded #wpcontent {
   margin-left: 36px; }
   @media screen and (max-width: 782px) {

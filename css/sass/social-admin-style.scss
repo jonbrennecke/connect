@@ -12,11 +12,10 @@
  */
 
 @import "./FontAwesome/font-awesome";
-@import "functions";
+@import "sass/functions";
 @import "admin_mixins";
 @import "fonts";
 @import "admin-vars";
-@import "confirm-frame";
 
 
 // adjust the margin so .wrap is adjacent to the left admin bar

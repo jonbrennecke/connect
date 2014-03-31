@@ -143,7 +143,3 @@ jQuery(document).ready( function () {
 
 	})( jQuery );
 });
-
-function instagram_oauth( test ) {
-	console.log(test)
-}

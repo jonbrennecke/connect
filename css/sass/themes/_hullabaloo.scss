@@ -117,7 +117,7 @@ div.hullabaloo {
 			a {
 				text-decoration: none;
 				font-weight: bolder;
-				color: inherit;
+				color: lighten($twitter,20%);
 
 				&:hover { text-decoration: underline; }
 			}
@@ -126,6 +126,7 @@ div.hullabaloo {
 			span[class*="fa-"] {
 				margin: 0 1em;
 				color: lighten($twitter,20%);
+				font-size: 22pt;
 			}
 
 			span.attrib {

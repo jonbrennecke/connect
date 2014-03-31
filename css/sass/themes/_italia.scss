@@ -1,21 +1,113 @@
+// div.italia {
+// 	// vars
+// 	$blue: #69b396;
+// 	$dark: #111;
+// 	$yellow: #ecd07d;
+
+// 	position: relative;
+// 	width: 100%;
+// 	height: 20em;
+// 	@include font(ActualBook);
+// 	color: $blue;
+// 	overflow: hidden;
+
+// 	border: 7px solid $blue;
+
+// 	div.cover-photo-container {
+// 		position: absolute;
+// 		z-index: -3;
+// 		width: 100%;
+// 		height: 100%;
+// 		top: 0;
+// 		left: 0;
+// 		overflow: hidden;
+
+// 		img.cover-photo {
+// 			width: 100%;
+// 			-webkit-filter: contrast(1.5) grayscale(0.7);
+// 		}
+// 	}
+
+// 	div.info-container {
+// 		width: 100%;
+// 		height: 100%;
+// 		padding: 1em;
+
+// 		@include h(1,4) {
+// 			display: block;
+// 			width: 15em;
+// 			font-size: 16pt;
+// 			font-weight: lighter;
+// 			background: $dark;
+// 			padding: 0.25em ( random() * 3 ) + em;
+// 			text-align: right;
+// 			position: relative;
+// 			left: 0;
+// 			margin: 0.5em ( random() * 10 ) + em;
+// 			transition: background 0.5s, color 0.5s, left 0.5s;
+// 			cursor: pointer;
+
+// 			&:hover {
+// 				background: $yellow;
+// 				color: $dark;
+// 				left: -1em;
+// 			}
+// 		}
+
+// 		h3.info_status-text {
+// 			width: 45em;
+// 		}
+
+// 		span[class*="fa-"] {	
+// 			display: none;
+// 		}
+// 	}
+// }
+
 div.italia {
 	// vars
-	$blue: #69b396;
-	$dark: #111;
-	$yellow: #ecd07d;
+	$gray: #c7b299;
+	$highlight: #fff;
+	@include font(default);
+
 
 	position: relative;
 	width: 100%;
 	height: 20em;
-	@include font(ActualBook);
-	color: $blue;
-	overflow: hidden;
+	border: 1px solid $highlight;
+	background: rgba($gray,0.2);
+	color: $highlight;
 
-	border: 7px solid $blue;
+	div.info-container {
+		position: absolute;
+		z-index: 0;
+		width: 100%;
+		height: 100%;
+
+		h1.info_section {
+			display: none;
+		}
+
+		h2.info_name {
+			@include font(Leckerli);
+			font-size: 30pt;
+
+			@for $i from 1 through 20 {
+				.char#{$i} {
+					@include transform(rotate(0deg));
+				}
+			}
+
+		}
+
+		@include h(1,6) {
+			font-weight: lighter;
+		}
+	}
 
 	div.cover-photo-container {
 		position: absolute;
-		z-index: -3;
+		z-index: -1;
 		width: 100%;
 		height: 100%;
 		top: 0;
@@ -24,42 +116,11 @@ div.italia {
 
 		img.cover-photo {
 			width: 100%;
-			-webkit-filter: contrast(1.5) grayscale(0.7);
+			-webkit-filter: contrast(1.5) grayscale(0.7); // blur(15px);
+
 		}
 	}
 
-	div.info-container {
-		width: 100%;
-		height: 100%;
-		padding: 1em;
 
-		@include h(1,4) {
-			display: block;
-			width: 15em;
-			font-size: 16pt;
-			font-weight: lighter;
-			background: $dark;
-			padding: 0.25em ( random() * 3 ) + em;
-			text-align: right;
-			position: relative;
-			left: 0;
-			margin: 0.5em ( random() * 10 ) + em;
-			transition: background 0.5s, color 0.5s, left 0.5s;
-			cursor: pointer;
 
-			&:hover {
-				background: $yellow;
-				color: $dark;
-				left: -1em;
-			}
-		}
-
-		h3.info_status-text {
-			width: 45em;
-		}
-
-		span[class*="fa-"] {
-			display: none;
-		}
-	}
 }

@@ -50,6 +50,7 @@ class Facebook_Widget extends WP_Widget {
 		// get user ID
 		$profile = $this->get_profile();
 
+		// echo the 'before_widget' code passed to the sidebar
 		echo $args['before_widget'];
 
 		if ( $profile ) {
@@ -59,7 +60,7 @@ class Facebook_Widget extends WP_Widget {
 			?>
 				<div class="italia facebook">
 					<div class="info-container">
-						<h1><span class='fa-facebook'></span><span class="section-title">Facebook</span></h1>
+						<h1 class="info_section"><span class='fa-facebook'></span><span class="section-title">Facebook</span></h1>
 						<h2 class="info_name"><?php echo $profile['name']; ?></h2>
 						<h3 class="info_status-text"><?php echo $profile['statuses']['data'][0]['message']; ?></h3>
 						<h4 class="info_timestamp"><?php $this->do_timestamp( $profile['statuses']['data'][0]['updated_time'] ); ?></h4>
@@ -69,12 +70,14 @@ class Facebook_Widget extends WP_Widget {
 			<?php
 		}
 
+		// echo the 'after_widget' code passed to the sidebar
 	 	echo $args['after_widget'];
 
 	}
 
 
 	/**
+	 * Request information from the user's profile using the Graph API
 	 *
 	 * @see https://developers.facebook.com/docs/graph-api
 	 */
@@ -88,7 +91,6 @@ class Facebook_Widget extends WP_Widget {
 
 			} catch ( FacebookApiException $e ) {
 				error_log($e);
-				$user = null;
 			}
 		}
 	}
@@ -97,6 +99,7 @@ class Facebook_Widget extends WP_Widget {
 	/**
 	 * converts the date passed back from the API to a human-readable string like "2 days ago" or "5 min ago"
 	 *
+	 * @param string $time_str - formatted date/time string returned from the API
 	 * @see http://www.php.net/manual/en/datetime.php
 	 */
 	private function do_timestamp( $time_str ) {
@@ -139,19 +142,18 @@ class Facebook_Widget extends WP_Widget {
 
 	/**
 	 *
-	 * 
+	 * find the album named 'Cover Photos' and retrieve the largest resolution copy of the current cover photo.
+	 * The current cover photo is first (index 0) in the array of cover photos.
+	 *
+	 * @param array $profile - data returned from the facebook profile API call
 	 *
 	 */
 	private function do_cover_photo( $profile ) {
-
 		foreach ($profile['albums']['data'] as $i => $album) {
 			if ($album['name'] == 'Cover Photos') {
-				$cover = $album['photos']['data'][0]['picture'];
+				return $album['photos']['data'][0]['images'][0]['source'];
 			}
 		}
-
-		// retrieve the link to a larger image
-		return preg_replace('/_s\./i', '_n.', $cover);
 	}
 
 
